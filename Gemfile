@@ -12,7 +12,7 @@ gem "unicorn", "4.9.0", require: false
 
 # Federation
 
-gem "diaspora_federation-rails", "0.0.2"
+gem "diaspora_federation-rails", "0.0.3"
 
 # API and JSON
 
@@ -129,7 +129,7 @@ gem "messagebus_ruby_api", "1.0.3"
 # Parsing
 
 gem "nokogiri",          "1.6.6.2"
-gem "redcarpet",         "3.3.1"
+gem "redcarpet",         "3.3.2"
 gem "twitter-text",      "1.12.0"
 gem "roxml",             "3.1.6"
 gem "ruby-oembed",       "0.8.14"
