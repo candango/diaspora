@@ -66,6 +66,10 @@ gem "pg",     "0.18.2" if ENV["DB"] == "all" || ENV["DB"] == "postgres"
 
 gem "activerecord-import", "0.8.0"
 
+# Redis
+
+gem "redis", "3.2.1"
+
 # File uploading
 
 gem "carrierwave", "0.10.0"
