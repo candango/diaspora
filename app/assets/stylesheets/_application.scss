@@ -7,7 +7,6 @@
 
 /* core */
 @import 'media-box';
-@import 'autocomplete';
 @import 'entypo';
 @import 'icons';
 @import 'mentions';
@@ -16,11 +15,12 @@
 @import 'hovercard';
 @import 'new_styles/base';
 @import 'new_styles/interactions';
-@import 'new_styles/spinner';
+@import 'spinner';
 @import 'lightbox';
 @import 'timeago';
 @import 'vendor/fileuploader';
 @import 'vendor/autoSuggest';
+@import 'typeahead';
 
 /* font overrides */
 @import 'new_styles/typography';
@@ -73,6 +73,7 @@
 @import 'stream';
 @import 'stream_element';
 @import 'comments';
+@import 'colorbox';
 @import 'diaspora_jsxc';
 @import 'chat';
 @import 'markdown-content';
@@ -91,6 +92,6 @@
 @import 'highlightjs/github';
 
 /* statistics */
-@import 'new_styles/statistics';
+@import 'statistics';
 
 @import "bootstrap3-switch";

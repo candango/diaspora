@@ -10,6 +10,7 @@ app.Router = Backbone.Router.extend({
     "user/edit": "settings",
     "users/sign_up": "registration",
     "profile/edit": "settings",
+    "admins/dashboard": "adminDashboard",
 
     //new hotness
     "posts/:id": "singlePost",
@@ -45,6 +46,10 @@ app.Router = Backbone.Router.extend({
     app.help = new app.views.Help();
     $("#help").prepend(app.help.el);
     app.help.render(section);
+  },
+
+  adminDashboard: function() {
+    app.page = new app.pages.AdminDashboard();
   },
 
   contacts: function() {
@@ -127,7 +132,7 @@ app.Router = Backbone.Router.extend({
             {tagText: decodeURIComponent(name).toLowerCase()}
           );
       $("#author_info").prepend(followedTagsAction.render().el);
-      app.tags = new app.views.Tags({tagName: name});
+      app.tags = new app.views.Tags({hashtagName: name});
     }
     this._hideInactiveStreamLists();
   },
