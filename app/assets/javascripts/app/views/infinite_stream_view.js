@@ -13,6 +13,7 @@ app.views.InfScroll = app.views.Base.extend({
     this.postViews = this.postViews || [];
     this._resetPostFragments();
 
+    this.showLoader();
     this.bind("loadMore", this.fetchAndshowLoader, this);
     this.stream.bind("fetched", this.finishedLoading, this);
     this.stream.bind("allItemsLoaded", this.unbindInfScroll, this);
@@ -26,10 +27,6 @@ app.views.InfScroll = app.views.Base.extend({
   _resetPostFragments: function() {
     this.appendedPosts  = document.createDocumentFragment();
     this.prependedPosts = document.createDocumentFragment();
-  },
-
-  postRenderTemplate : function() {
-    if(this.stream.isFetching()) { this.showLoader() }
   },
 
   createPostView : function(post){
@@ -85,6 +82,7 @@ app.views.InfScroll = app.views.Base.extend({
     this.$el.prepend(this.prependedPosts);
     this.$el.append(this.appendedPosts);
     this._resetPostFragments();
+    this.postRenderTemplate();
   },
 
   finishedLoading: function() {
@@ -97,12 +95,11 @@ app.views.InfScroll = app.views.Base.extend({
   },
 
   infScroll : function() {
-    var $window = $(window)
-      , distFromTop = $window.height() + $window.scrollTop()
-      , distFromBottom = $(document).height() - distFromTop
-      , bufferPx = 500;
+    var $window = $(window),
+        distFromBottom = $(document).height() - $window.height() - $window.scrollTop(),
+        elementDistance = this.$el.children().last().offset().top - $window.scrollTop() - 500;
 
-    if(distFromBottom < bufferPx) {
+    if(elementDistance <= 0 || distFromBottom < 500) {
       this.trigger("loadMore");
     }
   }

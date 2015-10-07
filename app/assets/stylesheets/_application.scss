@@ -1,47 +1,52 @@
-@import "bootstrap-complete.scss";
-
 @import 'perfect-scrollbar';
 
-@import "colors";
+@import 'color-variables';
+@import "bootstrap-complete.scss";
 @import 'mixins';
+
 
 /* core */
 @import 'media-box';
 @import 'entypo';
 @import 'icons';
 @import 'mentions';
+@import 'animations';
 @import 'flash_messages';
 @import 'sprites';
 @import 'hovercard';
-@import 'new_styles/base';
-@import 'new_styles/interactions';
+@import 'base';
+@import 'interactions';
 @import 'spinner';
-@import 'lightbox';
 @import 'timeago';
 @import 'vendor/fileuploader';
 @import 'vendor/autoSuggest';
 @import 'typeahead';
+@import 'colors';
 
 /* font overrides */
-@import 'new_styles/typography';
+@import 'typography';
 
 /* login */
-@import 'new_styles/login';
-@import 'new_styles/registration';
-@import 'new_styles/forms';
+@import 'login';
+@import 'registration';
+@import 'forms';
 
 /* terms */
 @import 'terms';
 
 /* profile and settings pages */
-@import 'new_styles/settings';
+@import 'settings';
 
 /* new SPV */
 @import 'header';
 @import 'footer';
 @import 'opengraph';
 @import 'single-post-view';
-@import 'new_styles/poll';
+@import 'poll';
+
+/* map*/
+@import 'leaflet';
+@import 'map';
 
 /* conversations */
 @import 'conversations';
@@ -81,17 +86,19 @@
 @import 'post-content';
 
 /* right bar */
-@import 'sidebar';
+@import 'navbar_right';
 
 /* contacts */
 @import 'contacts';
-@import 'leftnavbar';
+@import 'navbar_left';
 
 /* code */
-@import 'new_styles/code';
+@import 'code';
 @import 'highlightjs/github';
 
 /* statistics */
 @import 'statistics';
 
-@import "bootstrap3-switch";
+/* gallery */
+@import "blueimp-gallery";
+@import "gallery";

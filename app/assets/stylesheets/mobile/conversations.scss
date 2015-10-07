@@ -1,11 +1,12 @@
+.conversations-title {
+  margin: 0 0 20px 0;
+  h3 { display: inline; }
+}
 .conversation {
-
-  .conversation_participants {
+  .conversation-participants {
     padding: 1rem 1.2rem;
 
-    h3 {
-      margin: 0px;
-    }
+    h3 { margin: 0; }
 
     .delete_conversation {
       font-size: 2rem;
@@ -31,7 +32,7 @@
   }
 
   .stream .stream_element .timeago,
-  .conversation_participants .last_message_timeago {
+  .conversation-participants .last-message-timeago {
     display: block;
     font-style: italic;
     color: $text-grey;
@@ -56,3 +57,7 @@
     margin-top: 40px;
   }
 }
+
+.subject { padding: 0 10px; }
+
+.message-count, .unread-message-count { margin: 10px 2px; }

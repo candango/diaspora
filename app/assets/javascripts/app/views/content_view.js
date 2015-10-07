@@ -29,7 +29,6 @@ app.views.Content = app.views.Base.extend({
     return photos;
   },
 
-
   expandPost: function(evt) {
     var el = $(this.el).find('.collapsible');
     el.removeClass('collapsed').addClass('opened');
@@ -40,8 +39,8 @@ app.views.Content = app.views.Base.extend({
   },
 
   location: function(){
-    var address = this.model.get('address')? this.model.get('address') : '';
-    return address;
+    var location = this.model.get("location")? this.model.get("location") : "";
+    return location;
   },
 
   collapseOversized : function() {
@@ -73,6 +72,10 @@ app.views.Content = app.views.Base.extend({
 
   postRenderTemplate : function(){
     _.defer(_.bind(this.collapseOversized, this));
+    var photoAttachments = this.$(".photo_attachments");
+    if(photoAttachments.length > 0) {
+      new app.views.Gallery({ el: photoAttachments });
+    }
   }
 });
 
@@ -82,6 +85,10 @@ app.views.StatusMessage = app.views.Content.extend({
 
 app.views.ExpandedStatusMessage = app.views.StatusMessage.extend({
   postRenderTemplate : function(){
+    var photoAttachments = this.$(".photo_attachments");
+    if(photoAttachments.length > 0) {
+      new app.views.Gallery({ el: photoAttachments });
+    }
   }
 });
 
@@ -147,4 +154,5 @@ app.views.SPVOpenGraph = app.views.OpenGraph.extend({
     // override with nothing
   }
 });
+
 // @license-end

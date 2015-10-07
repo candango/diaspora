@@ -26,6 +26,15 @@
   .services_explanation {
     border-top: 1px solid $border-grey;
     margin-top: 1rem;
-    padding: 1rem;
+    padding: 1rem 0;
+  }
+}
+
+#blocked_people {
+  .blocked_person {
+    border-bottom: 1px solid $border-grey;
+    margin-top: 0;
+    .avatar { max-width: 35px; }
+    .info { color: $text; }
   }
 }

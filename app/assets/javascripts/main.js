@@ -44,3 +44,5 @@
 //= require bootstrap
 //= require osmlocator
 //= require bootstrap-switch
+//= require blueimp-gallery
+//= require leaflet

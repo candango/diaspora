@@ -94,10 +94,18 @@ var app = {
 
     // there's probably a better way to do this...
     $(document).on("click", "a[rel=backbone]", function(evt){
+      if (!(app.stream && /^\/(?:stream|activity|aspects|public|mentions|likes)/.test(app.stream.basePath()))) {
+        // We aren't on a regular stream page
+        return;
+      }
+
       evt.preventDefault();
       var link = $(this);
-
-      $(".stream_title").text(link.text());
+      if(link.data("stream-title") && link.data("stream-title").length) {
+        $(".stream_title").text(link.data("stream-title"));
+      } else {
+        $(".stream_title").text(link.text());
+      }
       app.router.navigate(link.attr("href").substring(1) ,true);
     });
   },
@@ -108,6 +116,7 @@ var app = {
       new app.views.AspectMembership({el: this});
     });
     app.sidebar = new app.views.Sidebar();
+    app.backToTop = new app.views.BackToTop({el: $(document)});
   },
 
   /* mixpanel wrapper function */

@@ -13,7 +13,7 @@
             <i class="entypo-trash"></i>
           </a>
         {{else}}
-          <a href="#" rel="nofollow" data-type="post" class="post_report" title="{{t "report.name"}}">
+          <a href="#" rel="nofollow" data-type="Post" class="post_report" title="{{t "report.name"}}">
             <i class="entypo-warning"></i>
           </a>
           <a href="#" rel="nofollow" class="block_user" title="{{t "ignore"}}">
@@ -40,10 +40,14 @@
         {{name}}
       {{/linkToAuthor}}
 
-      <span class="details grey">
+      <span class="details gray">
         -
         <a href="/posts/{{id}}">
           <time class="timeago" data-original-title="{{{localTime created_at}}}" datetime="{{created_at}}" />
+        </a>
+
+        <a href="/posts/{{id}}" class="permalink" title="{{t "stream.permalink"}}">
+          <i class="entypo-link"></i>
         </a>
 
         {{#if interactions.reshares_count}}

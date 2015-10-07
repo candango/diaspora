@@ -11,6 +11,7 @@ app.Router = Backbone.Router.extend({
     "users/sign_up": "registration",
     "profile/edit": "settings",
     "admins/dashboard": "adminDashboard",
+    "admin/pods": "adminPods",
 
     //new hotness
     "posts/:id": "singlePost",
@@ -50,6 +51,14 @@ app.Router = Backbone.Router.extend({
 
   adminDashboard: function() {
     app.page = new app.pages.AdminDashboard();
+  },
+
+  adminPods: function() {
+    this.renderPage(function() {
+      return new app.pages.AdminPods({
+        el: $("#pod-list")
+      });
+    });
   },
 
   contacts: function() {
@@ -98,6 +107,7 @@ app.Router = Backbone.Router.extend({
     app.stream.fetch();
     app.page = new app.views.Stream({model : app.stream});
     app.publisher = app.publisher || new app.views.Publisher({collection : app.stream.items});
+    app.shortcuts = app.shortcuts || new app.views.StreamShortcuts({el: $(document)});
 
     var streamFacesView = new app.views.StreamFaces({collection : app.stream.items});
 

@@ -88,6 +88,7 @@ And /^I hover over the "([^"]+)"$/ do |element|
 end
 
 When /^I prepare the deletion of the first post$/ do
+  find(".stream .stream_element", match: :first).hover
   within(find(".stream .stream_element", match: :first)) do
     ctrl = find(".control-icons")
     ctrl.hover
@@ -95,8 +96,22 @@ When /^I prepare the deletion of the first post$/ do
   end
 end
 
+When /^I prepare hiding the first post$/ do
+  find(".stream .stream_element", match: :first).hover
+  within(find(".stream .stream_element", match: :first)) do
+    ctrl = find(".control-icons")
+    ctrl.hover
+    ctrl.find(".hide_post").click
+  end
+end
+
 When /^I click to delete the first post$/ do
   step "I prepare the deletion of the first post"
+  step "I confirm the alert"
+end
+
+When /^I click to hide the first post$/ do
+  step "I prepare hiding the first post"
   step "I confirm the alert"
 end
 

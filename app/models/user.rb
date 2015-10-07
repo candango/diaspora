@@ -422,6 +422,10 @@ class User < ActiveRecord::Base
     Postzord::Dispatcher.build(self, profile).post
   end
 
+  def basic_profile_present?
+    tag_followings.any? || profile[:image_url]
+  end
+
   ###Helpers############
   def self.build(opts = {})
     u = User.new(opts.except(:person, :id))
@@ -462,7 +466,7 @@ class User < ActiveRecord::Base
     aq = self.aspects.create(:name => I18n.t('aspects.seed.acquaintances'))
 
     if AppConfig.settings.autofollow_on_join?
-      default_account = Webfinger.new(AppConfig.settings.autofollow_on_join_user).fetch
+      default_account = Person.find_or_fetch_by_identifier(AppConfig.settings.autofollow_on_join_user)
       self.share_with(default_account, aq) if default_account
     end
     aq
@@ -487,6 +491,10 @@ class User < ActiveRecord::Base
 
   def admin?
     Role.is_admin?(self.person)
+  end
+
+  def moderator?
+    Role.moderator?(person)
   end
 
   def podmin_account?

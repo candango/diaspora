@@ -29,7 +29,14 @@ app.views.StreamPost = app.views.Post.extend({
     "click .destroy_participation": "destroyParticipation"
   },
 
-  tooltipSelector : ".timeago, .post_scope, .post_report, .block_user, .delete, .create_participation, .destroy_participation",
+  tooltipSelector : [".timeago",
+                     ".post_scope",
+                     ".post_report",
+                     ".block_user",
+                     ".delete",
+                     ".create_participation",
+                     ".destroy_participation",
+                     ".permalink"].join(", "),
 
   initialize : function(){
     var personId = this.model.get('author').id;
@@ -91,6 +98,7 @@ app.views.StreamPost = app.views.Post.extend({
 
   remove : function() {
     $(this.el).slideUp(400, _.bind(function(){this.$el.remove()}, this));
+    app.stream.remove(this.model);
     return this;
   },
 

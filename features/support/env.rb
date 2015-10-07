@@ -39,10 +39,10 @@ Capybara.default_driver = :selenium
 Capybara.default_selector = :css
 
 # We have a ridiculously high wait time to account for build machines of various beefiness.
-# Capybara.default_wait_time = 30
+# Capybara.default_max_wait_time = 30
 
 # While there are a lot of failures, wait less, avoiding travis timeout
-Capybara.default_wait_time = 15
+Capybara.default_max_wait_time = 15
 
 # If you set this to false, any error raised from within your app will bubble
 # up to your step definition and out to cucumber unless you catch it somewhere
@@ -67,9 +67,6 @@ require Rails.root.join('spec', 'helper_methods')
 require Rails.root.join('spec', 'support', 'inlined_jobs')
 require Rails.root.join('spec', 'support', 'user_methods')
 include HelperMethods
-
-# require 'webmock/cucumber'
-# WebMock.disable_net_connect!(:allow_localhost => true)
 
 Before do
   Devise.mailer.deliveries = []

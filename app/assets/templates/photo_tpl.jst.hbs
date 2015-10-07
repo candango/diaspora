@@ -1,4 +1,4 @@
-<div class="media col-md-4">
+<div class="media">
   <div class="bd">
     {{#if loggedIn}}
       <div class="control-icons">
@@ -7,7 +7,7 @@
             <i class="entypo-trash"></i>
           </a>
         {{else}}
-          <a href="#" rel="nofollow" data-type="post" class="post_report" title="{{t "report.name"}}">
+          <a href="#" rel="nofollow" data-type="Post" class="post_report" title="{{t "report.name"}}">
             <i class="entypo-warning"></i>
           </a>
           <a href="#" rel="nofollow" class="block_user" title="{{t "ignore"}}">
@@ -21,9 +21,9 @@
     {{/if}}
 
     <div class="thumbnail img-thumbnail">
-      <a href="#" class="photo-link">
-        <img src="{{sizes.large}}" class="photo big_photo" data-small-photo="{{sizes.small}}" data-full-photo="{{sizes.large}}" rel="lightbox">
+      <a href="{{sizes.large}}" class="photo-link gallery-picture">
+        <img src="{{sizes.large}}" class="photo big_photo">
       </a>
     </div>
-
+  </div>
 </div>
