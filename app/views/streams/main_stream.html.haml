@@ -3,7 +3,7 @@
 -#   the COPYRIGHT file.
 
 - content_for :head do
-  - if AppConfig.chat.enabled?
+  - if not AppConfig.chat.enabled?
     = javascript_include_tag :jsxc, id: 'jsxc',
       data: { endpoint: get_bosh_endpoint }
 
@@ -61,3 +61,5 @@
 
       %a.back-to-top#back-to-top{title: "#{t('layouts.application.back_to_top')}", href: "#"}
         &#8679;
+    .span1
+      #chatBar
