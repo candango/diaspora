@@ -9,6 +9,7 @@ gem "responders", "2.1.0"
 # Appserver
 
 gem "unicorn", "4.9.0", require: false
+gem "passenger", "5.0.20", require: false 
 
 # Federation
 
