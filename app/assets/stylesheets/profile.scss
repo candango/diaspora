@@ -9,8 +9,8 @@ body.page-people.action-show, body.page-people.action-contacts {
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 20px;
-    margin-left: -10px;
-    margin-top: 0px;
+    margin-top: -20px;
+    box-shadow: $card-shadow;
 
     #edit_profile, #unblock_user_button, .aspect_dropdown {
       margin-top: 15px;
@@ -107,24 +107,7 @@ body.page-people.action-show, body.page-people.action-contacts {
       }
     }
   }
-  #cropContainerHeader {
-    width: 1500px;
-    max-height: 400px;
-    position:relative; /* or fixed or absolute */
-  }
-  #profile_banner {
-    z-index: 1;
-    height: 400px;
-    img {
-      left: 0;
-      right: 0;
-      top: -9999px;
-      bottom: -9999px;
-      margin: auto 0;
-      width: 100%;
-      max-height: 400px;
-    }
-  }
+
   #profile {
     background-color: $white;
     padding: 20px;
@@ -133,17 +116,9 @@ body.page-people.action-show, body.page-people.action-contacts {
     box-shadow: $card-shadow;
 
     #profile_photo {
-      margin-top: -100px;
+      margin-top: 10px;
       padding-bottom: 10px;
-      margin-left: 80px;
-      border-bottom: 1px dashed $border-grey;
       text-align: center;
-      z-index: 3;
-      position: relative;
-      img {
-	width: 250px;
-        height: auto;
-      }
     }
 
     ul#profile_information {
