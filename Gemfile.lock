@@ -147,7 +147,7 @@ GEM
     devise_lastseenable (0.0.6)
       devise
       rails (>= 3.0.4)
-    diaspora-vines (0.2.0.develop.3)
+    diaspora-vines (0.2.0.develop.4)
       activerecord (~> 4.1)
       bcrypt (~> 3.1)
       em-hiredis (~> 0.3.0)
@@ -588,15 +588,12 @@ GEM
     rails-assets-jquery.ui (1.11.4)
       rails-assets-jquery (>= 1.6)
     rails-assets-markdown-it--markdown-it-for-inline (0.1.1)
-    rails-assets-markdown-it (4.4.0)
-    rails-assets-markdown-it-diaspora-mention (0.3.0)
-    rails-assets-markdown-it-hashtag (0.3.1)
-    rails-assets-markdown-it-sanitizer (0.3.2)
+    rails-assets-markdown-it-diaspora-mention (0.4.0)
+    rails-assets-markdown-it-hashtag (0.4.0)
+    rails-assets-markdown-it-sanitizer (0.4.0)
     rails-assets-markdown-it-sub (1.0.0)
     rails-assets-markdown-it-sup (1.0.0)
-    rails-assets-perfect-scrollbar (0.6.5)
-    rails-assets-typeahead.js (0.11.1)
-      rails-assets-jquery (>= 1.7)
+    rails-assets-perfect-scrollbar (0.6.7)
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
     rails-dom-testing (1.0.7)
@@ -890,15 +887,14 @@ DEPENDENCIES
   rails-assets-jquery (= 1.11.2)!
   rails-assets-jquery-placeholder (= 2.1.2)!
   rails-assets-jquery-textchange (= 0.2.3)!
-  rails-assets-markdown-it (= 4.4.0)!
+  rails-assets-markdown-it (= 5.0.0)!
   rails-assets-markdown-it--markdown-it-for-inline (= 0.1.1)!
-  rails-assets-markdown-it-diaspora-mention (= 0.3.0)!
-  rails-assets-markdown-it-hashtag (= 0.3.1)!
-  rails-assets-markdown-it-sanitizer (= 0.3.2)!
+  rails-assets-markdown-it-diaspora-mention (= 0.4.0)!
+  rails-assets-markdown-it-hashtag (= 0.4.0)!
+  rails-assets-markdown-it-sanitizer (= 0.4.0)!
   rails-assets-markdown-it-sub (= 1.0.0)!
   rails-assets-markdown-it-sup (= 1.0.0)!
-  rails-assets-perfect-scrollbar (= 0.6.5)!
-  rails-assets-typeahead.js (= 0.11.1)!
+  rails-assets-perfect-scrollbar (= 0.6.7)!
   rails-i18n (= 4.0.5)
   rails-timeago (= 2.11.0)
   rails_admin (= 0.7.0)
