@@ -140,7 +140,7 @@ class ApplicationController < ActionController::Base
     if current_user
       # an unique SHA1 key
      data = "#{session[:session_id]}:#{current_user.id}:#{request.remote_ip}:#{current_user.username}"
-     cookies["_validation_token_key"] = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), current_user.authentication_token, data)
+     cookies["_validation_token_key"] = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), current_user.username, data)
       # store session data or any authentication data you want here, generate to JSON data
       stored_session = JSON.generate({
         "user_id"=> current_user.id, 
@@ -148,7 +148,6 @@ class ApplicationController < ActionController::Base
         "remote_ip"=>request.remote_ip, 
         "session_id"=> session[:session_id], 
         "validation_token_key"=> cookies["_validation_token_key"],
-        "authentication_token" => current_user.authentication_token,
       })
       $redis.set(
         "diaspora_session:" + cookies["_validation_token_key"],
