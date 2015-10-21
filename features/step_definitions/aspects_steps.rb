@@ -42,10 +42,10 @@ When /^I click on "([^"]*)" aspect edit icon$/ do |aspect_name|
 end
 
 When /^I select only "([^"]*)" aspect$/ do |aspect_name|
-  click_link 'My aspects'
-  within('#aspects_list') do
-    click_link 'Deselect all'
-    current_scope.should have_no_css '.selected'
+  click_link "My aspects"
+  within("#aspects_list") do
+    all(".selected").each {|node| node.find(:xpath, "..").click }
+    expect(current_scope).to have_no_css ".selected"
   end
   step %Q(I select "#{aspect_name}" aspect as well)
 end
@@ -88,24 +88,21 @@ When /^(.*) in the aspect creation modal$/ do |action|
   end
 end
 
-When /^I drag "([^"]*)" (up|down) (\d+) pixels?$/ do |aspect_name, direction, distance|
-  distance = distance.to_i * -1 if direction == "up"
-  page.execute_script %{
-    function drag() {
-      $("li.aspect:contains('#{aspect_name}')")
-        .simulate("drag-n-drop", { dy: #{distance}, interpolation: { stepWidth: 10, stepDelay: 5 } });
-    }
-    function loadScripts() {
-      $.getScript("/assets/jquery-simulate/jquery.simulate.js", function(){
-        $.getScript("/assets/jquery-simulate-ext/src/jquery.simulate.ext.js", function(){
-          $.getScript("/assets/jquery-simulate-ext/src/jquery.simulate.drag-n-drop.js", drag);
-        });
-      });
-    }
-    if (!$.simulate) { loadScripts(); } else { drag(); }
-  }
-  expect(find("#aspect_nav")).to have_css ".synced"
-end
+When /^I drag "([^"]*)" (up|down)$/ do |aspect_name, direction|
+  aspect_id = @me.aspects.where(name: aspect_name).first.id
+  aspect = find(:xpath, "//div[@id='aspect_nav']/ul/a[@data-aspect-id='#{aspect_id}']")
+  target = direction == "up" ? aspect.all(:xpath, "./preceding-sibling::a").last :
+                               aspect.all(:xpath, "./following-sibling::a").first
+  browser = aspect.base.driver.browser
+  mouse = browser.mouse
+  native_aspect = aspect.base.native
+  native_target = target.base.native
+  mouse.down native_aspect
+  mouse.move_to native_target, native_target.size.width / 2, 0
+  sleep 1
+  mouse.up
+  expect(page).to have_no_css "#aspect_nav .ui-sortable.syncing"
+ end
 
 And /^I toggle the aspect "([^"]*)"$/ do |name|
   toggle_aspect(name)
@@ -130,5 +127,5 @@ Then /^the aspect dropdown should be visible$/ do
 end
 
 Then /^I should see "([^"]*)" as (\d+). aspect$/ do |aspect_name, position|
-  expect(find("#aspect_nav li:nth-child(#{position.to_i + 2})")).to have_text aspect_name
+  expect(find("#aspect_nav a:nth-child(#{position.to_i + 2})")).to have_text aspect_name
 end

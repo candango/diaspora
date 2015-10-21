@@ -38,18 +38,22 @@
 
   "predef": [
     "_",
+    "autosize",
     "Backbone",
+    "Bloodhound",
     "gon",
     "Handlebars",
     "HandlebarsTemplates",
     "ImagePaths",
     "jsxc",
+    "L",
     "MBP",
     "Routes",
     "OSM",
     "parse_url",
     "punycode",
     "qq",
+    "blueimp",
 
     "loginAs",
     "logout",

@@ -99,6 +99,12 @@ FactoryGirl.define do
       end
     end
 
+    factory(:status_message_with_location) do
+      after(:build) do |sm|
+        FactoryGirl.create(:location, status_message: sm)
+      end
+    end
+
     factory(:status_message_with_photo) do
       sequence(:text) {|n| "There are #{n} ninjas in this photo." }
       after(:build) do |sm|
@@ -134,8 +140,9 @@ FactoryGirl.define do
   end
 
   factory(:location) do
-    lat 1
-    lng 2
+    address "Fernsehturm Berlin, Berlin, Germany"
+    lat 52.520645
+    lng 13.409779
   end
 
   factory(:poll) do
@@ -201,6 +208,11 @@ FactoryGirl.define do
     sequence(:name) { |num| "Rob Fergus the #{num.ordinalize}" }
     association :service
     photo_url "/assets/user/adams.jpg"
+  end
+
+  factory :pod do
+    sequence(:host) {|n| "pod#{n}.example#{r_str}.com" }
+    ssl true
   end
 
   factory(:comment) do
@@ -294,4 +306,33 @@ FactoryGirl.define do
   end
 
   factory(:status, :parent => :status_message)
+
+  # Factories for the DiasporaFederation-gem
+
+  factory(:federation_person_from_webfinger, class: DiasporaFederation::Entities::Person) do
+    sequence(:guid) { UUID.generate :compact }
+    sequence(:diaspora_id) {|n| "bob-person-#{n}#{r_str}@example.net" }
+    url AppConfig.pod_uri.to_s
+    exported_key OpenSSL::PKey::RSA.generate(1024).public_key.export
+    profile {
+      DiasporaFederation::Entities::Profile.new(
+        FactoryGirl.attributes_for(:federation_profile_from_hcard, diaspora_id: diaspora_id))
+    }
+  end
+
+  factory(:federation_profile_from_hcard, class: DiasporaFederation::Entities::Profile) do
+    sequence(:diaspora_id) {|n| "bob-person-#{n}#{r_str}@example.net" }
+    sequence(:first_name) {|n| "My Name#{n}#{r_str}" }
+    last_name nil
+    image_url "/assets/user/default.png"
+    image_url_medium "/assets/user/default.png"
+    image_url_small "/assets/user/default.png"
+    searchable true
+  end
+
+  factory :federation_profile_from_hcard_with_image_url, parent: :federation_profile_from_hcard do
+    image_url "http://example.com/image.jpg"
+    image_url_medium "http://example.com/image_mid.jpg"
+    image_url_small "http://example.com/image_small.jpg"
+  end
 end

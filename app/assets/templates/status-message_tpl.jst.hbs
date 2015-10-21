@@ -1,20 +1,44 @@
+<div class="nsfw-shield">
+  <strong>
+    #NSFW
+  </strong>
+  |
+  <a href="#" class="show_nsfw_post">
+    {{t "stream.show_nsfw_post"}}
+  </a>
+  |
+  <a href="#" class="toggle_nsfw_state">
+    {{t "stream.show_nsfw_posts"}}
+  </a>
+</div>
+
+<div class="nsfw-off">
+  <strong>
+    #NSFW
+  </strong>
+  |
+  <a href="#" class="toggle_nsfw_state">
+      {{t "stream.hide_nsfw_posts"}}
+  </a>
+</div>
+
 {{#if largePhoto}}
-  <div class="photo_attachments">
-    <a href="#" class="stream-photo-link">
-      {{#with largePhoto}}
-        <img src="{{sizes.large}}" class="stream-photo big_stream_photo" data-small-photo="{{sizes.small}}" data-full-photo="{{sizes.large}}" rel="lightbox">
-      {{/with}}
-    </a>
+  <div class="photo_attachments nsfw-hidden">
+    {{#with largePhoto}}
+      <a href="{{sizes.large}}" class="stream-photo-link gallery-picture">
+        <img src="{{sizes.large}}" class="stream-photo big_stream_photo">
+      </a>
+    {{/with}}
 
     {{#each smallPhotos}}
-      <a href="#" class="stream-photo-link">
-        <img src="{{sizes.small}}" class="stream-photo thumb_small" data-small-photo="{{sizes.small}}" data-full-photo="{{sizes.large}}" rel="lightbox">
+      <a href="{{sizes.large}}" class="stream-photo-link gallery-picture">
+        <img src="{{sizes.small}}" class="stream-photo thumb_small">
       </a>
     {{/each}}
   </div>
 {{/if}}
 
-<div class="collapsible">
+<div class="collapsible nsfw-hidden">
   <div class="markdown-content">
     {{#if text}}
       {{{text}}}

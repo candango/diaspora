@@ -1,6 +1,7 @@
 #publisher {
   z-index: 1;
   color: $text-grey;
+  margin: 0;
 
   &.closed {
     #button_container,
@@ -15,35 +16,49 @@
     #publisher_textarea_wrapper { border: 1px solid $border-grey !important; }
   }
 
+  .container-fluid{ padding: 0; }
   .mentions-autocomplete-list ul { width: 100% !important; }
 
   form {
     margin: 0;
     #fileInfo { display: none !important; }
-    #hide_publisher {
-      margin-top: 10px;
-    }
 
     #publisher_spinner {
+      margin: 20px;
       text-align: center;
     }
 
     .options_and_submit {
-      #publisher_service_icons {
-        margin-right: 10px;
-        .btn-link {
-          padding-left: 5px;
-          padding-right: 5px;
-          text-decoration: none;
+      padding: 10px 0;
+      #publisher-service-icons {
+        text-decoration: none;
+
+        .entypo-cog, .service_icon {
+          color: $text-grey;
+          font-size: 16px;
+          line-height: 16px;
         }
-        .btn-link.question_mark { margin-left: 5px; }
-        .btn-link.question_mark .entypo { color: $text-grey; }
-        .btn-link.question_mark:hover .entypo { color: $black; }
+        .service_icon { padding: 6px 5px; }
+        .btn.btn-link.question_mark:hover .entypo-cog { color: $black; }
         .dim { opacity: 0.3; }
         .social_media_logos-wordpress-16x16 {
           display: inline-block;
           height: 16px;
           width: 16px;
+        }
+      }
+
+      @media(max-width: $screen-xs) {
+        .btn-toolbar {
+          width: 100%;
+          display: flex;
+          .btn, .aspect_dropdown{ flex-grow: 1; }
+          .aspect_dropdown .btn { width: 100%; }
+        }
+        .btn-group:first-child { margin: 0; }
+        .dropdown-menu.pull-right {
+          left: 0;
+          right: auto;
         }
       }
     }
@@ -56,7 +71,7 @@
       input[type='text']#status_message_text {
         border: none;
         box-shadow: none;
-        margin: none;
+        margin: 0;
       }
 
       textarea {
@@ -71,8 +86,7 @@
         min-height: 70px;
       }
 
-      .help-block {
-        font-size: 13px;
+      .markdownIndications {
         line-height: 30px;
         padding-left: 10px;
         margin-bottom: 0;
@@ -81,19 +95,19 @@
       }
 
       .mentions-input-box .mentions {
-        line-height: $line-height !important;
+        line-height: $line-height-base !important;
       }
 
-      &.with_attachments .row-fluid#photodropzone_container {
+      &.with_attachments #photodropzone_container {
         border-top: 1px dashed $border-grey;
       }
 
-      .row-fluid#poll_creator_container {
+      #poll_creator_container {
         display: none;
         border-top: 1px dashed $border-grey;
         padding:4px 6px 4px 6px;
         box-sizing: border-box;
-        .remove-answer.entypo.cross {
+        .remove-answer.entypo-cross {
           display: none;
           color: lighten($black,75%);
           &.active { display: block; }
@@ -104,15 +118,23 @@
         }
       }
 
-      &.with_location .row-fluid#location_container {
+      &.with_location .loader {
+        height: 20px;
+        width: 20px;
+      }
+      &.with_location #location_container {
         height: 30px;
+        margin-bottom: 0;
         border-top: 1px dashed $border-grey;
         input[type='text'] {
-          margin-bottom: 0;
+          border: none;
           color: $text-grey;
+          height: 20px;
+          margin-bottom: 0;
+          padding: 0;
         }
       }
-      &.active .row-fluid#button_container {
+      &.active #button_container {
         border-top: 1px solid $border-grey;
       }
 
@@ -143,7 +165,7 @@
             color: black;
             font-size: 50px;
             line-height: 50px;
-            font-style: bold;
+            font-weight: bold;
             position: absolute;
             z-index: 2;
             opacity: 0.85;
@@ -173,7 +195,7 @@
 
       #upload_error {
         color: white;
-        font-style: bold;
+        font-weight: bold;
         border-top: 1px solid white;
         background-color: $red;
         text-align: center;
@@ -187,7 +209,8 @@
         #hide_location {
           text-decoration: none !important;
           font-size: 16px;
-          padding: 4px 5px;
+          line-height: $line-height-computed;
+          padding: 4px 2px;
           i {
             color: $text-grey;
           }
@@ -214,9 +237,8 @@
         height: 30px;
         line-height: 30px;
         position: absolute;
-        right: 100px;
-        bottom: -31px;
-        font-size: 13px;
+        right: 10px;
+        bottom: -25px;
       }
       &.with_location .counter {
         bottom: -62px;
@@ -232,8 +254,10 @@
 
   .aspect_dropdown {
     .radio {
-      min-height: 0px;
-      padding-left: 0px;
+      min-height: 0;
+      padding-left: 0;
+      margin-top: 0;
+      margin-bottom: 0;
     }
   }
 }

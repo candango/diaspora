@@ -49,7 +49,7 @@
       $.extend(Diaspora.Widgets[Widget].prototype, Diaspora.EventBroker.extend(Diaspora.BaseWidget));
 
       var widget = new Diaspora.Widgets[Widget](),
-        args = Array.prototype.slice.call(arguments, 1);
+          args = Array.prototype.slice.call(arguments, 1);
 
       widget.publish("widget/ready", args);
 
@@ -68,7 +68,6 @@
   Diaspora.BasePage = function(body) {
     $.extend(this, Diaspora.BaseWidget);
     $.extend(this, {
-      backToTop: this.instantiate("BackToTop", body.find("#back-to-top")),
       directionDetector: this.instantiate("DirectionDetector"),
       events: function() { return Diaspora.page.eventsContainer.data("events"); },
       flashMessages: this.instantiate("FlashMessages"),
@@ -87,14 +86,9 @@
       Diaspora.page = new Page();
     }
 
-    if(!$.mobile)//why does this need this?
+    if(!$.mobile) // why does this need this?
       $.extend(Diaspora.page, new Diaspora.BasePage($(document.body)));
     Diaspora.page.publish("page/ready", [$(document.body)]);
-  };
-
-  // temp hack to check if backbone is enabled for the page
-  Diaspora.backboneEnabled = function(){
-    return window.app && window.app.stream !== undefined;
   };
 
   window.Diaspora = Diaspora;

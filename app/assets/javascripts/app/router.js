@@ -9,21 +9,20 @@ app.Router = Backbone.Router.extend({
     "conversations": "conversations",
     "user/edit": "settings",
     "users/sign_up": "registration",
+    "profile/edit": "settings",
+    "admins/dashboard": "adminDashboard",
+    "admin/pods": "adminPods",
 
-    //new hotness
     "posts/:id": "singlePost",
     "p/:id": "singlePost",
 
-    //oldness
     "activity": "stream",
     "stream": "stream",
-    "participate": "stream",
-    "explore": "stream",
     "aspects": "aspects",
-    "aspects/stream": "aspects_stream",
     "commented": "stream",
     "liked": "stream",
     "mentions": "stream",
+    "public": "stream",
     "followed_tags": "followed_tags",
     "tags/:name": "followed_tags",
     "people/:id/photos": "photos",
@@ -46,13 +45,25 @@ app.Router = Backbone.Router.extend({
     app.help.render(section);
   },
 
+  adminDashboard: function() {
+    app.page = new app.pages.AdminDashboard();
+  },
+
+  adminPods: function() {
+    this.renderPage(function() {
+      return new app.pages.AdminPods({
+        el: $("#pod-list")
+      });
+    });
+  },
+
   contacts: function() {
     app.aspect = new app.models.Aspect(gon.preloads.aspect);
-    app.contacts = new app.collections.Contacts(app.parsePreload('contacts'));
+    app.contacts = new app.collections.Contacts(app.parsePreload("contacts"));
 
     var stream = new app.views.ContactStream({
       collection: app.contacts,
-      el: $('.stream.contacts #contact_stream'),
+      el: $(".stream.contacts #contact_stream"),
     });
 
     app.page = new app.pages.Contacts({stream: stream});
@@ -80,31 +91,22 @@ app.Router = Backbone.Router.extend({
     app.page.render();
 
     if( !$.contains(document, app.page.el) ) {
-      // view element isn't already attached to the DOM, insert it
+      // view element isn"t already attached to the DOM, insert it
       $("#container").empty().append(app.page.el);
     }
   },
 
-  //below here is oldness
-
   stream : function() {
     app.stream = new app.models.Stream();
     app.stream.fetch();
-    app.page = new app.views.Stream({model : app.stream});
-    app.publisher = app.publisher || new app.views.Publisher({collection : app.stream.items});
-
-    var streamFacesView = new app.views.StreamFaces({collection : app.stream.items});
-
-    $("#main_stream").html(app.page.render().el);
-    $('#selected_aspect_contacts .content').html(streamFacesView.render().el);
-    this._hideInactiveStreamLists();
+    this._initializeStreamView();
   },
 
   photos : function(guid) {
     this.renderPage(function() {
       return new app.pages.Profile({
         person_id: guid,
-        el: $('body > .container-fluid'),
+        el: $("body > #profile_container"),
         streamCollection: app.collections.Photos,
         streamView: app.views.Photos
       });
@@ -126,46 +128,30 @@ app.Router = Backbone.Router.extend({
             {tagText: decodeURIComponent(name).toLowerCase()}
           );
       $("#author_info").prepend(followedTagsAction.render().el);
-      app.tags = new app.views.Tags({tagName: name});
+      app.tags = new app.views.Tags({hashtagName: name});
     }
     this._hideInactiveStreamLists();
   },
 
-  aspects : function(){
-    app.aspects = new app.collections.Aspects(app.currentUser.get('aspects'));
-    this.aspects_list =  new app.views.AspectsList({ collection: app.aspects });
-    this.aspects_list.render();
+  aspects: function() {
+    app.aspects = app.aspects || new app.collections.Aspects(app.currentUser.get("aspects"));
+    this.aspectsList = this.aspectsList || new app.views.AspectsList({ collection: app.aspects });
+    this.aspectsList.render();
     this.aspects_stream();
   },
 
   aspects_stream : function(){
-    var ids = app.aspects.selectedAspects('id');
+    var ids = app.aspects.selectedAspects("id");
     app.stream = new app.models.StreamAspects([], { aspects_ids: ids });
     app.stream.fetch();
-
-    app.page = new app.views.Stream({model : app.stream});
-    app.publisher = app.publisher || new app.views.Publisher({collection : app.stream.items});
+    this._initializeStreamView();
     app.publisher.setSelectedAspects(ids);
-
-    var streamFacesView = new app.views.StreamFaces({collection : app.stream.items});
-
-    $("#main_stream").html(app.page.render().el);
-    $('#selected_aspect_contacts .content').html(streamFacesView.render().el);
-    this._hideInactiveStreamLists();
-  },
-
-  _hideInactiveStreamLists: function() {
-    if(this.aspects_list && Backbone.history.fragment !== "aspects")
-      this.aspects_list.hideAspectsList();
-
-    if(this.followedTagsView && Backbone.history.fragment !== "followed_tags")
-      this.followedTagsView.hideFollowedTags();
   },
 
   bookmarklet: function() {
     var contents = (window.gon) ? gon.preloads.bookmarklet : {};
     app.bookmarklet = new app.views.Bookmarklet(
-      _.extend({}, {el: $('#bookmarklet')}, contents)
+      _.extend({}, {el: $("#bookmarklet")}, contents)
     ).render();
   },
 
@@ -173,6 +159,33 @@ app.Router = Backbone.Router.extend({
     this.renderPage(function() { return new app.pages.Profile({
       el: $('body > .container-fluid')
     }); });
+  },
+
+  _hideInactiveStreamLists: function() {
+    if(this.aspectsList && Backbone.history.fragment !== "aspects") {
+      this.aspectsList.hideAspectsList();
+    }
+
+    if(this.followedTagsView && Backbone.history.fragment !== "followed_tags") {
+      this.followedTagsView.hideFollowedTags();
+    }
+  },
+
+  _initializeStreamView: function() {
+    if(app.page) {
+      app.page.unbindInfScroll();
+      app.page.remove();
+    }
+
+    app.page = new app.views.Stream({model : app.stream});
+    app.publisher = app.publisher || new app.views.Publisher({collection : app.stream.items});
+    app.shortcuts = app.shortcuts || new app.views.StreamShortcuts({el: $(document)});
+
+    var streamFacesView = new app.views.StreamFaces({collection : app.stream.items});
+
+    $("#main_stream").html(app.page.render().el);
+    $("#selected_aspect_contacts .content").html(streamFacesView.render().el);
+    this._hideInactiveStreamLists();
   }
 });
 // @license-end

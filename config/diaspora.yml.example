@@ -162,14 +162,13 @@ configuration: ## Section
 
   ## Settings affecting how ./script/server behaves.
   server: ## Section
-    ## Where the appserver should listen to (default=0.0.0.0:3000)
-    #listen: '127.0.0.1:3000'
+    ## Where the appserver should listen to (default=unix:tmp/diaspora.sock)
     #listen: 'unix:tmp/diaspora.sock'
     #listen: 'unix:/run/diaspora/diaspora.sock'
+    #listen: '127.0.0.1:3000'
 
-    ## The port on which the appserver should listen (default=none).
-    ## Note: this setting is deprecated, use listen instead.
-    #port: 3000
+    ## Set the path for the PID file of the unicorn master process (default=none)
+    #pid: '/run/diaspora/diaspora.pid'
 
     ## Rails environment (default='development').
     ## The environment in which the server should be started by default.
@@ -206,13 +205,13 @@ configuration: ## Section
   ## The internal XMPP server does not support https
   ## and even if we implement it, we would ran into certificate issues.
   ## The problem with mixed-content is described here:
-  ## https://github.com/Zauberstuhl/diaspora/issues/6
+  ## https://wiki.diasporafoundation.org/Vines#Browser_blocks_mixed-content
   ##
   ## The easiest way of avoiding certificate and mixed-content issues
   ## is to use a proxy, e.g.:
   ##
-  ## Apache: https://gist.github.com/Zauberstuhl/2d09330961614b12b642
-  ## Nginx: https://gist.github.com/Zauberstuhl/ee95e1eacefa6ddbec6e
+  ## Apache: https://wiki.diasporafoundation.org/Vines#Apache2
+  ## Nginx: https://wiki.diasporafoundation.org/Vines#Nginx
   ##
   ## If you configured your proxy correctly, you should adjust
   ## the configuration in the BOSH section.
@@ -228,8 +227,11 @@ configuration: ## Section
       ## In case you want to run your own server, you should disable it.
       #enabled: false
 
-      ## Set the directory in which to look for virtual hosts'
-      ## TLS certificates.
+      ## Set the directory in which to look for virtual hosts TLS certificates.
+      ## Check documentation on how to generate or configure your existing
+      ## certficates correctly:
+      ##
+      ## https://wiki.diasporafoundation.org/Vines#Certificates
       #certs: 'config/vines'
 
       ## The server accepts by default only valid certificates.
@@ -254,6 +256,10 @@ configuration: ## Section
         #address: '0.0.0.0'
 
         ## Configure the client-to-server port.
+        ## If your server is behind a router or firewall
+        ## check documentation on how to forward ports:
+        ##
+        ## https://wiki.diasporafoundation.org/Vines#Firewall_Ports
         #port: 5222
 
         ## The maximum we'd like to allow for stanza size.
@@ -270,6 +276,10 @@ configuration: ## Section
         #address: '0.0.0.0'
 
         ## Configure the server-to-server port.
+        ## If your server is behind a router or firewall
+        ## check documentation on how to forward ports:
+        ##
+        ## https://wiki.diasporafoundation.org/Vines#Firewall_Ports
         #port: 5269
 
         ## The max_stanza_size attribute should be
@@ -316,6 +326,20 @@ configuration: ## Section
         ## Set the logging level to debug, info, warn, error, or fatal.
         ## The debug level logs all XML sent and received by the server.
         #level: 'info'
+
+  ## Displays the location of a post in a map. Per default we are using the map
+  ## tiles of the Heidelberg University (http://giscience.uni-hd.de).
+  ## You also have the possibility to use the map tiles of https://www.mapbox.com
+  ## which is probably more reliable. There you have to create an account to get
+  ## an ID and an access token which is limited. If you want to get an unlimited
+  ## account you can write an email to team@diasporafoundation.org.
+  ## Please enable mapbox and fill out your id and access_token.
+  map: ##Section
+
+    mapbox:
+    # enabled: false
+    # id: 'your.id'
+    # access_token: 'youraccesstoken'
 
   ## Settings potentially affecting the privacy of your users.
   privacy: ## Section
@@ -408,11 +432,11 @@ configuration: ## Section
     ## follow an account upon creation.
     #autofollow_on_join: true
 
-    ## Auto-follow account (default='diasporahq@joindiaspora.com')
+    ## Auto-follow account (default='hq@pod.diaspora.software')
     ## The diaspora* HQ account keeps users up to date with news about Diaspora.
     ## If you set another auto-follow account (for example your podmin account),
     ## please consider resharing diaspora* HQ's posts for your pod's users!
-    #autofollow_on_join_user: 'diasporahq@joindiaspora.com'
+    #autofollow_on_join_user: 'hq@pod.diaspora.software'
 
     ## Welcome Message settings
     welcome_message: ##Section
@@ -568,6 +592,13 @@ configuration: ## Section
     ## If not set your pod will provide a downloadable archive.
     #source_url: 'https://example.org/username/diaspora'
 
+    ## Default color theme
+    ## You can change which color theme is displayed when a user is not signed in
+    ## or has not selected any color theme from the available ones. You simply have
+    ## to enter the name of the theme's folder in "app/assets/stylesheets/color_themes/".
+    ## ("original" for the theme in "app/assets/stylesheets/color_themes/original/", for
+    ## example).
+    #default_color_theme: "original"
   ## Posting from Diaspora to external services (all are disabled by default).
   services: ## Section
 
@@ -675,6 +706,38 @@ configuration: ## Section
 
     ## E-mail address to contact the administrator.
     #podmin_email: 'podmin@example.org'
+
+  ## Settings related to relays
+  relay: ## Section
+
+    ## Relays are applications that exist to push public posts around to
+    ## pods which want to subscribe to them but would not otherwise
+    ## receive them due to not having direct contact with the remote pods.
+    ##
+    ## See more regarding relays: https://wiki.diasporafoundation.org/Relay_servers_for_public_posts
+
+    outbound: ## Section
+      ## Enable this setting to send out public posts from this pod to a relay
+      #send: false
+      ## Change default remote relay handle used for sending out here
+      #handle: 'relay@relay.iliketoast.net'
+
+    inbound: ## Section
+      ## Enable this to receive public posts from relays
+      #subscribe: false
+
+      ## Scope is either 'all' or 'tags' (default).
+      ## - 'all', means this pod wants to receive all public posts from a relay
+      ## - 'tags', means this pod wants only posts tagged with certain tags
+      #scope: tags
+
+      ## If scope is 'tags', should we include tags that users on this pod follow?
+      ## These are added in addition to 'pod_tags', if set.
+      #include_user_tags: false
+
+      ## If scope is 'tags', a comma separated list of tags here can be set.
+      ## For example "linux,diaspora", to receive posts related to these tags
+      #pod_tags:
 
 ## Here you can override settings defined above if you need
 ## to have them different in different environments.
