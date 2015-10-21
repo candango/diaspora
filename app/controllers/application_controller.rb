@@ -40,7 +40,15 @@ class ApplicationController < ActionController::Base
 
   # Overwriting the sign_out redirect path method
   def after_sign_out_path_for(resource_or_scope)
-    is_mobile_device? ? root_path : new_user_session_path
+    #expire session in redis
+    if cookies["_validation_token_key"].present?
+      $redis.del("diaspora_session:" + cookies["_validation_token_key"])
+    end
+    if is_mobile_device?
+      root_path
+    else
+      new_user_session_path
+    end
   end
 
   def all_aspects
@@ -131,6 +139,26 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
+    # Based on http://stevenyue.com/2013/07/04/sharing-sessions-and-authentication-between-rails-and-node-js-using-redis/
+    #store session to redis
+    if current_user
+      # an unique SHA1 key
+     data = "#{session[:session_id]}:#{current_user.id}:#{request.remote_ip}:#{current_user.username}"
+     cookies["_validation_token_key"] = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), current_user.authentication_token, data)
+      # store session data or any authentication data you want here, generate to JSON data
+      stored_session = JSON.generate({
+        "user_id"=> current_user.id, 
+        "username"=>current_user.username, 
+        "remote_ip"=>request.remote_ip, 
+        "session_id"=> session[:session_id], 
+        "validation_token_key"=> cookies["_validation_token_key"],
+        "authentication_token" => current_user.authentication_token,
+      })
+      $redis.set(
+        "diaspora_session:" + cookies["_validation_token_key"],
+        stored_session,
+      )
+    end
     stored_location_for(:user) || current_user_redirect_path
   end
 
