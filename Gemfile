@@ -2,6 +2,8 @@ source "https://rubygems.org"
 
 gem "rails", "4.2.5"
 
+gem "ast", "2.1.0"
+
 # Legacy Rails features, remove me!
 # responders (class level)
 gem "responders", "2.1.0"
@@ -9,6 +11,7 @@ gem "responders", "2.1.0"
 # Appserver
 
 gem "unicorn", "4.9.0", require: false
+gem "passenger", "5.0.20", require: false
 
 # Federation
 
@@ -69,6 +72,10 @@ group :postgresql, optional: true do
 end
 
 gem "activerecord-import", "0.10.0"
+
+# Redis
+
+gem "redis", "3.2.1"
 
 # File uploading
 
