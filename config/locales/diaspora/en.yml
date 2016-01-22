@@ -182,9 +182,6 @@ en:
       video_title:
         unknown: "Unknown video title"
   aspects:
-    zero: "No aspects"
-    one: "1 aspect"
-    other: "%{count} aspects"
     contacts_visible: "Contacts in this aspect will be able to see each other."
     contacts_not_visible: "Contacts in this aspect will not be able to see each other."
     edit:
@@ -288,6 +285,8 @@ en:
       success: "Successfully removed person from aspect."
       failure: "Failed to remove person from aspect."
       no_membership: "Could not find the selected person in that aspect."
+      forbidden: "You are not allowed to do that."
+      invalid_statement: "Duplicate record rejected."
 
   bookmarklet:
     heading: "Bookmarklet"
@@ -309,9 +308,6 @@ en:
     other: "%{count} reactions"
 
   contacts:
-    zero: "No contacts"
-    one: "1 contact"
-    other: "%{count} contacts"
     create:
       failure: "Failed to create contact"
     sharing:
@@ -600,6 +596,8 @@ en:
 
   invitation_codes:
     excited: "%{name} is excited to see you here."
+    not_valid: "That invite code is no longer valid"
+    
   invitations:
     create:
       sent: "Invitations have been sent to: %{emails}"
@@ -884,6 +882,48 @@ en:
         Hoping to see you again,
 
         The diaspora* email robot!
+  api:
+    openid_connect:
+      authorizations:
+        new:
+          redirection_message: "Are you sure you want to give access to %{redirect_uri}?"
+          access: "%{name} requires access to:"
+          no_requirement: "%{name} requires no permissions"
+          approve: "Approve"
+          deny: "Deny"
+          bad_request: "Missing client id or redirect URI"
+          client_id_not_found: "No client with client_id %{client_id} with redirect URI %{redirect_uri} found"
+        destroy:
+          fail: "The attempt to revoke the authorization with ID %{id} failed"
+      user_applications:
+        index:
+          edit_applications: "Applications"
+          title: "Authorized applications"
+          access: "%{name} has access to:"
+          no_requirement: "%{name} requires no permissions"
+        no_applications: "You have no authorized applications"
+        revoke_autorization: "Revoke"
+        tos: "See the application's terms of service"
+        policy: "See the application's privacy policy"
+      scopes:
+        openid:
+          name: "basic profile"
+          description: "This allows the application to read your basic profile"
+        extended:
+          name: "extended profile"
+          description: "This allows the application to read your extended profile"
+        read:
+          name: "read profile, stream and conversations"
+          description: "This allows the application to read your stream, your conversations and your complete profile"
+        write:
+          name: "send posts, conversations and reactions"
+          description: "This allows the application to send new posts, write conversations, and send reactions"
+      error_page:
+        title: "Oh! Something went wrong :("
+        contact_developer: "You should contact the developer of the application and include the following detailed error message:"
+        login_required: "You must first login before you can authorize this application"
+        could_not_authorize: "The application could not be authorized"
+
   people:
     zero: "No people"
     one: "1 person"
@@ -917,7 +957,6 @@ en:
       start_sharing: "Start sharing"
       message: "Message"
       mention: "Mention"
-      ignoring: "You are ignoring all posts from %{name}."
       closed_account: "This account has been closed."
     sub_header:
       you_have_no_tags: "You have no tags!"
@@ -993,6 +1032,7 @@ en:
       destroy: "Delete"
       permalink: "Permalink"
       not_found: "Sorry, we couldn’t find that post."
+      forbidden: "You are not allowed to do that"
       photos_by:
         zero: "No photos by %{author}"
         one: "One photo by %{author}"
@@ -1384,7 +1424,7 @@ en:
         mr_wiggles: "Mr Wiggles will be sad to see you go"
         what_we_delete: "We will delete all of your posts and profile data as soon as possible. Your comments on other people’s posts will still appear, but they will be associated with your diaspora* ID rather than your name."
         locked_out: "You will get signed out and locked out of your account until it has been deleted."
-        lock_username: "Your username will be locked. You will not be able create a new account on this pod with the same ID."
+        lock_username: "Your username will be locked. You will not be able to create a new account on this pod with the same ID."
         no_turning_back: "There is no turning back! If you’re really sure, enter your password below."
         if_you_want_this: "If you really want this to happen, type in your password below and click “Close account”"
 

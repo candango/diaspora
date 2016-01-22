@@ -75,13 +75,6 @@ app.pages.Profile = app.views.Base.extend({
     if(!this.model.has("profile")){
       return false;
     }
-    if( this.model.isBlocked() ) {
-      $("#main_stream").empty().html(
-        '<div class="dull">'+
-        Diaspora.I18n.t("profile.ignoring", {name: this.model.get("name")}) +
-        "</div>");
-      return false;
-    }
 
     // a collection is set, this means we want to view photos
     var route = this.streamCollection ? "personPhotos" : "personStream";
@@ -96,6 +89,7 @@ app.pages.Profile = app.views.Base.extend({
     if( this.model.get("is_own_profile") ) {
       app.publisher = new app.views.Publisher({collection : app.stream.items});
     }
+    app.shortcuts = app.shortcuts || new app.views.StreamShortcuts({el: $(document)});
 
     return new view({model: app.stream});
   },

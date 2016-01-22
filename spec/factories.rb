@@ -10,6 +10,9 @@ def r_str
   SecureRandom.hex(3)
 end
 
+require "diaspora_federation/test"
+DiasporaFederation::Test::Factories.federation_factories
+
 FactoryGirl.define do
   factory :profile do
     sequence(:first_name) { |n| "Robert#{n}#{r_str}" }
@@ -306,6 +309,59 @@ FactoryGirl.define do
   end
 
   factory(:status, :parent => :status_message)
+
+  factory :o_auth_application, class: Api::OpenidConnect::OAuthApplication do
+    client_name "Diaspora Test Client"
+    redirect_uris %w(http://localhost:3000/)
+  end
+
+  factory :o_auth_application_with_image, class: Api::OpenidConnect::OAuthApplication do
+    client_name "Diaspora Test Client"
+    redirect_uris %w(http://localhost:3000/)
+    logo_uri "/assets/user/default.png"
+  end
+
+  factory :o_auth_application_with_ppid, class: Api::OpenidConnect::OAuthApplication do
+    client_name "Diaspora Test Client"
+    redirect_uris %w(http://localhost:3000/)
+    ppid true
+    sector_identifier_uri "https://example.com/uri"
+  end
+
+  factory :o_auth_application_with_ppid_with_specific_id, class: Api::OpenidConnect::OAuthApplication do
+    client_name "Diaspora Test Client"
+    redirect_uris %w(http://localhost:3000/)
+    ppid true
+    sector_identifier_uri "https://example.com/uri"
+  end
+
+  factory :o_auth_application_with_multiple_redirects, class: Api::OpenidConnect::OAuthApplication do
+    client_name "Diaspora Test Client"
+    redirect_uris %w(http://localhost:3000/ http://localhost/)
+  end
+
+  factory :o_auth_application_with_xss, class: Api::OpenidConnect::OAuthApplication do
+    client_name "<script>alert(0);</script>"
+    redirect_uris %w(http://localhost:3000/)
+  end
+
+  factory :auth_with_read, class: Api::OpenidConnect::Authorization do
+    o_auth_application
+    user
+    scopes %w(openid sub aud profile picture nickname name read)
+  end
+
+  factory :auth_with_read_and_ppid, class: Api::OpenidConnect::Authorization do
+    association :o_auth_application, factory: :o_auth_application_with_ppid
+    user
+    scopes %w(openid sub aud profile picture nickname name read)
+  end
+
+  factory :auth_with_read_and_write, class: Api::OpenidConnect::Authorization do
+    o_auth_application
+    user
+    scopes %w(openid sub aud profile picture nickname name read write)
+  end
 
   # Factories for the DiasporaFederation-gem
 
