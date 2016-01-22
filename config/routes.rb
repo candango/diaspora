@@ -18,6 +18,7 @@ Diaspora::Application.routes.draw do
     mount Sidekiq::Web => '/sidekiq', :as => 'sidekiq'
   end
 
+  # Federation
   mount DiasporaFederation::Engine => "/"
 
   get "/atom.xml" => redirect('http://blog.diasporafoundation.org/feed/atom') #too many stupid redirects :()
@@ -187,17 +188,6 @@ Diaspora::Application.routes.draw do
   get '/u/:username' => 'people#show', :as => 'user_profile', :constraints => { :username => /[^\/]+/ }
   get '/u/:username/profile_photo' => 'users#user_photo', :constraints => { :username => /[^\/]+/ }
 
-
-  # Federation
-
-  controller :publics do
-    post 'receive/users/:guid'  => :receive
-    post 'receive/public'       => :receive_public
-    get 'hub'                   => :hub
-  end
-
-
-
   # External
 
   resources :services, :only => [:index, :destroy]
@@ -208,15 +198,7 @@ Diaspora::Application.routes.draw do
     end
   end
 
-  scope 'api/v0', :controller => :apis do
-    get :me
-  end
-
   namespace :api do
-    namespace :v0 do
-      get "/users/:username" => 'users#show', :as => 'user'
-      get "/tags/:name" => 'tags#show', :as => 'tag'
-    end
     namespace :v1 do
       resources :tokens, :only => [:create, :destroy]
     end
@@ -250,4 +232,28 @@ Diaspora::Application.routes.draw do
 
   # Startpage
   root :to => 'home#show'
+
+  api_version(module: "Api::V0", path: {value: "api/v0"}, default: true) do
+    match "user", to: "users#show", via: %i(get post)
+  end
+
+  namespace :api do
+    namespace :openid_connect do
+      resources :clients, only: :create
+      get "clients/find", to: "clients#find"
+
+      post "access_tokens", to: "token_endpoint#create"
+
+      # Authorization Servers MUST support the use of the HTTP GET and POST methods at the Authorization Endpoint
+      # See http://openid.net/specs/openid-connect-core-1_0.html#AuthResponseValidation
+      resources :authorizations, only: %i(new create destroy)
+      post "authorizations/new", to: "authorizations#new"
+      get "user_applications", to: "user_applications#index"
+      get "jwks.json", to: "id_tokens#jwks"
+      match "user_info", to: "user_info#show", via: %i(get post)
+    end
+  end
+
+  get ".well-known/webfinger", to: "api/openid_connect/discovery#webfinger"
+  get ".well-known/openid-configuration", to: "api/openid_connect/discovery#configuration"
 end

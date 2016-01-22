@@ -30,6 +30,15 @@ bind to an UNIX socket at `unix:tmp/diaspora.sock`. Please change your local
 
 With the port to Bootstrap 3, app/views/terms/default.haml has a new structure. If you have created a customised app/views/terms/terms.haml or app/views/terms/terms.erb file, you will need to edit those files to base your customisations on the new default.haml file.
 
+## API authentication
+
+This release makes diaspora\* a OpenID Connect provider. This means you can authenticate to third parties with your diaspora\* account and let
+them act as your diaspora* account on your behalf. This feature is still considered in early development, we still expect edge cases and advanced
+features of the specificiation to not be handled correctly or be missing. But we expect a basic OpenID Connect compliant client to work. Please submit issues!
+We will also most likely still change the authorization scopes we offer and started with a very minimal set.
+Most work still required is on documentation as well as designing and implementing the data API for all of Diaspora's functionality.
+Contributions are very welcome, the hard work is done!
+
 ## Refactor
 * Improve bookmarklet [#5904](https://github.com/diaspora/diaspora/pull/5904)
 * Update listen configuration to listen on unix sockets by default [#5974](https://github.com/diaspora/diaspora/pull/5974)
@@ -59,6 +68,7 @@ With the port to Bootstrap 3, app/views/terms/default.haml has a new structure. 
 * Replace mobile background with color [#6415](https://github.com/diaspora/diaspora/pull/6415)
 * Port flash messages to backbone [#6395](https://github.com/diaspora/diaspora/6395)
 * Change login/registration/forgot password button color [#6504](https://github.com/diaspora/diaspora/pull/6504)
+* A note regarding ignoring users was added to the failure messages on commenting/liking [#6646](https://github.com/diaspora/diaspora/pull/6646)
 
 ## Bug fixes
 * Destroy Participation when removing interactions with a post [#5852](https://github.com/diaspora/diaspora/pull/5852)
@@ -68,6 +78,8 @@ With the port to Bootstrap 3, app/views/terms/default.haml has a new structure. 
 * Prevent multiple comment boxes on mobile [#6363](https://github.com/diaspora/diaspora/pull/6363)
 * Correctly display location in post preview [#6429](https://github.com/diaspora/diaspora/pull/6429)
 * Do not fail when submitting an empty comment in the mobile view [#6543](https://github.com/diaspora/diaspora/pull/6543)
+* Limit flash message width on small devices [#6529](https://github.com/diaspora/diaspora/pull/6529)
+* Add navbar on mobile when not logged in [#6483](https://github.com/diaspora/diaspora/pull/6483)
 
 ## Features
 * Support color themes [#6033](https://github.com/diaspora/diaspora/pull/6033)
@@ -84,19 +96,55 @@ With the port to Bootstrap 3, app/views/terms/default.haml has a new structure. 
 * Redesign and refactor report admin interface [#6378](https://github.com/diaspora/diaspora/pull/6378)
 * Add permalink icon to stream elements [#6457](https://github.com/diaspora/diaspora/pull/6457)
 * Move reshare count to interactions for stream elements [#6487](https://github.com/diaspora/diaspora/pull/6487)
+* Posts of ignored users are now visible on that profile page [#6617](https://github.com/diaspora/diaspora/pull/6617)
+* Add white color theme [#6631](https://github.com/diaspora/diaspora/pull/6631)
 
-# 0.5.5.0
+# 0.5.7.0
 
 ## Refactor
+* Internationalize controller rescue\_from text [#6554](https://github.com/diaspora/diaspora/pull/6554)
+
+## Bug fixes
+* Fix plural rules handling more than wanted as "one" [#6630](https://github.com/diaspora/diaspora/pull/6630)
+
+## Features
+* Keyboard shortcuts now do work on profile pages as well [#6647](https://github.com/diaspora/diaspora/pull/6647/files)
+
+# 0.5.6.1
+
+* Fix Nokogiri CVE-2015-7499
+* Fix unsafe "Remember me" cookies in Devise
+
+# 0.5.6.0
+
+## Refactor
+* Add more integration tests with the help of the new diaspora-federation gem [#6539](https://github.com/diaspora/diaspora/pull/6539)
+
+## Bug fixes
+* Fix mention autocomplete when pasting the username [#6510](https://github.com/diaspora/diaspora/pull/6510)
+* Use and update updated\_at for notifications [#6573](https://github.com/diaspora/diaspora/pull/6573)
+* Ensure the author signature is checked when receiving a relayable [#6539](https://github.com/diaspora/diaspora/pull/6539)
+* Do not try to display hovercards when logged out [#6587](https://github.com/diaspora/diaspora/pull/6587)
+
+## Features
+
+* Display hovercards without aspect dropdown when logged out [#6603](https://github.com/diaspora/diaspora/pull/6603)
+* Add media.ccc.de as a trusted oEmbed endpoint
+
+# 0.5.5.1
+
+* Fix XSS on profile pages
+* Bump nokogiri to fix several libxml2 CVEs, see http://www.ubuntu.com/usn/usn-2834-1/
+
+# 0.5.5.0
 
 ## Bug fixes
 * Redirect to sign in page when a background request fails with 401 [#6496](https://github.com/diaspora/diaspora/pull/6496)
 * Correctly skip setting sidekiq logfile on Heroku [#6500](https://github.com/diaspora/diaspora/pull/6500)
 * Fix notifications for interactions by non-contacts [#6498](https://github.com/diaspora/diaspora/pull/6498)
 * Fix issue where the publisher was broken on profile pages [#6503](https://github.com/diaspora/diaspora/pull/6503)
-* Limit flash message width on small devices [#6529](https://github.com/diaspora/diaspora/pull/6529)
-
-## Features
+* Prevent participations being created for invalid interactions [#6552](https://github.com/diaspora/diaspora/pull/6552)
+* Improve federation for reshare related interactions [#6481](https://github.com/diaspora/diaspora/pull/6481)
 
 # 0.5.4.0
 
