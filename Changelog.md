@@ -78,6 +78,8 @@ Contributions are very welcome, the hard work is done!
 * Change login/registration/forgot password button color [#6504](https://github.com/diaspora/diaspora/pull/6504)
 * A note regarding ignoring users was added to the failure messages on commenting/liking [#6646](https://github.com/diaspora/diaspora/pull/6646)
 * Replace sidetiq with sidekiq-cron [#6616](https://github.com/diaspora/diaspora/pull/6616)
+* Refactor mobile comment section [#6509](https://github.com/diaspora/diaspora/pull/6509)
+* Set vertical resize as default for all textareas [#6654](https://github.com/diaspora/diaspora/pull/6654)
 
 ## Bug fixes
 * Destroy Participation when removing interactions with a post [#5852](https://github.com/diaspora/diaspora/pull/5852)
@@ -89,7 +91,7 @@ Contributions are very welcome, the hard work is done!
 * Do not fail when submitting an empty comment in the mobile view [#6543](https://github.com/diaspora/diaspora/pull/6543)
 * Limit flash message width on small devices [#6529](https://github.com/diaspora/diaspora/pull/6529)
 * Add navbar on mobile when not logged in [#6483](https://github.com/diaspora/diaspora/pull/6483)
-*  Fix timeago tooltips for reshares [#6648](https://github.com/diaspora/diaspora/pull/6648)
+* Fix timeago tooltips for reshares [#6648](https://github.com/diaspora/diaspora/pull/6648)
 
 ## Features
 * Support color themes [#6033](https://github.com/diaspora/diaspora/pull/6033)
@@ -114,10 +116,13 @@ Contributions are very welcome, the hard work is done!
 
 ## Refactor
 * Internationalize controller rescue\_from text [#6554](https://github.com/diaspora/diaspora/pull/6554)
+* Make mention parsing a bit more robust [#6658](https://github.com/diaspora/diaspora/pull/6658)
+* Remove unlicensed images [#6673](https://github.com/diaspora/diaspora/pull/6673)
 
 ## Bug fixes
 * Fix plural rules handling more than wanted as "one" [#6630](https://github.com/diaspora/diaspora/pull/6630)
 * Fix `suppress_annoying_errors` eating too much errors [#6653](https://github.com/diaspora/diaspora/pull/6653)
+* Ensure the rubyzip gem is properly loaded [#6659](https://github.com/diaspora/diaspora/pull/6659)
 
 ## Features
 * Keyboard shortcuts now do work on profile pages as well [#6647](https://github.com/diaspora/diaspora/pull/6647/files)
