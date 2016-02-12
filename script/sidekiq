@@ -1,0 +1,7 @@
+#!/bin/bash
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export RAILS_ENV=production
+export DB=postgres
+cd /opt/home/diaspora/diaspora
+exec bundle exec sidekiq

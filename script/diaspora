@@ -1,0 +1,8 @@
+#!/bin/bash
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+export RAILS_ENV=production
+export DB=postgres
+cd /opt/home/diaspora/diaspora
+exec bundle exec passenger start
