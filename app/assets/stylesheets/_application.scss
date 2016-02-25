@@ -26,6 +26,9 @@
 /* font overrides */
 @import 'typography';
 
+// layout
+@import 'sidebar';
+
 /* login */
 @import 'login';
 @import 'registration';
@@ -74,7 +77,6 @@
 
 /* stream */
 @import 'tag';
-@import 'stream-faces';
 @import 'stream';
 @import 'stream_element';
 @import 'comments';
