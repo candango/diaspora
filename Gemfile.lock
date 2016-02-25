@@ -653,7 +653,7 @@ GEM
     rails-assets-jquery.ui (1.11.4)
       rails-assets-jquery (>= 1.6)
     rails-assets-markdown-it--markdown-it-for-inline (0.1.1)
-    rails-assets-markdown-it (5.1.0)
+    rails-assets-markdown-it (6.0.0)
     rails-assets-markdown-it-diaspora-mention (0.4.0)
     rails-assets-markdown-it-hashtag (0.4.0)
     rails-assets-markdown-it-sanitizer (0.4.1)
@@ -832,6 +832,7 @@ GEM
       hitimes
     tins (1.6.0)
     trollop (2.1.2)
+    turbo_dev_assets (0.0.2)
     twitter (5.16.0)
       addressable (~> 2.3)
       buftok (~> 0.2.0)
@@ -990,7 +991,7 @@ DEPENDENCIES
   rails-assets-jquery (= 1.12.0)!
   rails-assets-jquery-placeholder (= 2.3.1)!
   rails-assets-jquery-textchange (= 0.2.3)!
-  rails-assets-markdown-it (= 5.1.0)!
+  rails-assets-markdown-it (= 6.0.0)!
   rails-assets-markdown-it--markdown-it-for-inline (= 0.1.1)!
   rails-assets-markdown-it-diaspora-mention (= 0.4.0)!
   rails-assets-markdown-it-hashtag (= 0.4.0)!
@@ -1027,6 +1028,7 @@ DEPENDENCIES
   spring-commands-rspec (= 1.0.4)
   test_after_commit (= 0.4.2)
   timecop (= 0.8.0)
+  turbo_dev_assets (= 0.0.2)
   twitter (= 5.16.0)
   twitter-text (= 1.13.3)
   typhoeus (= 0.8.0)
