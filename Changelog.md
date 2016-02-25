@@ -83,6 +83,7 @@ Contributions are very welcome, the hard work is done!
 * Unifiy max-widths and page layouts [#6675](https://github.com/diaspora/diaspora/pull/6675)
 * Enable autosizing for all textareas [#6674](https://github.com/diaspora/diaspora/pull/6674)
 * Stream faces are gone [#6686](https://github.com/diaspora/diaspora/pull/6686)
+* Refactor mobile javascript and add tests [#6394](https://github.com/diaspora/diaspora/pull/6394)
 
 ## Bug fixes
 * Destroy Participation when removing interactions with a post [#5852](https://github.com/diaspora/diaspora/pull/5852)
@@ -120,6 +121,18 @@ Contributions are very welcome, the hard work is done!
 * Add answer counts to poll [#6641](https://github.com/diaspora/diaspora/pull/6641)
 * Check for collapsible posts after images in posts have loaded [#6671](https://github.com/diaspora/diaspora/pull/6671)
 * Add reason for post report to email sent to admins [#6679](https://github.com/diaspora/diaspora/pull/6679)
+
+# 0.5.8.0
+
+## Refactor
+
+## Bug fixes
+* Fix empty name field when editing aspect names [#6706](https://github.com/diaspora/diaspora/pull/6706)
+* Fix internal server error when trying to log out of an expired session [#6707](https://github.com/diaspora/diaspora/pull/6707)
+* Only mark unread notifications as read [#6711](https://github.com/diaspora/diaspora/pull/6711)
+
+## Features
+* Added the footer to conversation pages [#6710](https://github.com/diaspora/diaspora/pull/6710)
 
 # 0.5.7.0
 
