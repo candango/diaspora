@@ -72,6 +72,10 @@ end
 
 gem "activerecord-import", "0.13.0"
 
+# Redis
+
+gem "redis", "3.3.0"
+
 # File uploading
 
 gem "carrierwave", "0.11.2"
