@@ -51,6 +51,14 @@ We will also most likely still change the authorization scopes we offer and star
 Most work still required is on documentation as well as designing and implementing the data API for all of Diaspora's functionality.
 Contributions are very welcome, the hard work is done!
 
+## Vines got replaced by Prosody
+
+Due to many issues with Vines, we decided to remove Vines and offer a Prosody
+example configuration instead. [Check the
+wiki](https://wiki.diasporafoundation.org/Integration/Chat#Vines_to_Prosody)
+for more information on how to migrate to Prosody if you've been using Vines
+before.
+
 ## Refactor
 * Improve bookmarklet [#5904](https://github.com/diaspora/diaspora/pull/5904)
 * Update listen configuration to listen on unix sockets by default [#5974](https://github.com/diaspora/diaspora/pull/5974)
@@ -99,6 +107,7 @@ Contributions are very welcome, the hard work is done!
 * Redesign back to top button [#6782](https://github.com/diaspora/diaspora/pull/6782)
 * Adjusted Facebook integration for a successful review [#6778](https://github.com/diaspora/diaspora/pull/6778)
 * Redirect to the sign-in page instead of the stream on account deletion [#6784](https://github.com/diaspora/diaspora/pull/6784)
+* Removed own unicorn killer by a maintained third-party gem [#6792](https://github.com/diaspora/diaspora/pull/6792)
 
 ## Bug fixes
 * Destroy Participation when removing interactions with a post [#5852](https://github.com/diaspora/diaspora/pull/5852)
@@ -142,14 +151,32 @@ Contributions are very welcome, the hard work is done!
 * Add links to the single post view of the related post to photos in the photo stream [#6621](https://github.com/diaspora/diaspora/pull/6621)
 * Add a note for people with disabled JavaScript [#6777](https://github.com/diaspora/diaspora/pull/6777)
 
-# 0.5.9.0
+# 0.5.10.0
 
 ## Refactor
 
 ## Bug fixes
-* Fix back to top button not appearing on Webkit browsers [#6782](https://github.com/diaspora/diaspora/pull/6782)
 
 ## Features
+
+# 0.5.9.1
+
+Update Nokogiri to 1.6.8, which in turn updates libxml2 to 2.9.4 and libxslt to 1.1.29,
+addressing a range of security issues. See https://groups.google.com/forum/#!topic/ruby-security-ann/RCHyF5K9Lbc
+for more details.
+
+# 0.5.9.0
+
+## Refactor
+* Remove unused mentions regex [#6810](https://github.com/diaspora/diaspora/pull/6810)
+
+## Bug fixes
+* Fix back to top button not appearing on Webkit browsers [#6782](https://github.com/diaspora/diaspora/pull/6782)
+* Don't reset the notification timestamp when marking them as read [#6821](https://github.com/diaspora/diaspora/pull/6821)
+
+## Features
+
+* The sender's diaspora-ID is now shown in invitation mails [#6817](https://github.com/diaspora/diaspora/pull/6817)
 
 # 0.5.8.0
 
