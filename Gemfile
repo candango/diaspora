@@ -2,6 +2,8 @@ source "https://rubygems.org"
 
 gem "rails", "4.2.6"
 
+gem "ast", "2.1.0"
+
 # Legacy Rails features, remove me!
 # responders (class level)
 gem "responders", "2.2.0"
@@ -71,6 +73,10 @@ end
 
 
 gem "activerecord-import", "0.13.0"
+
+# Redis
+
+gem "redis", "3.2.1"
 
 # File uploading
 
