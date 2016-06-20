@@ -4,5 +4,7 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 export RAILS_ENV=production
 export DB=postgres
+CPU_NUMBER=`cat /proc/cpuinfo | grep processor | wc -l`
+MAX_POOL_SIZE=`expr $CPU_NUMBER + 2`
 cd /opt/home/diaspora/diaspora
-exec bundle exec passenger start --max-pool-size=4 --min-instances=3 --pool-idle-time=60
+exec bundle exec passenger start --max-pool-size=$MAX_POOL_SIZE --min-instances=$CPU_NUMBER --pool-idle-time=60
