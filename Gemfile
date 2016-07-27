@@ -10,7 +10,7 @@ gem "responders", "2.2.0"
 
 #gem "unicorn", "5.1.0", require: false
 #gem "unicorn-worker-killer", "0.4.4"
-gem "passenger", "5.0.29", require: false
+gem "passenger", "5.0.30", require: false
 
 # Federation
 
