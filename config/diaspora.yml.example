@@ -86,9 +86,23 @@ configuration: ## Section
       #retry: 10
 
       ## Lines of backtrace that are stored on failure (default=15).
-      ## Set n to the required value. Set this to false to reduce memory
+      ## Set n to the required value. Set this to false to reduce Redis memory
       ## usage (and log size) if you're not interested in this data.
       #backtrace: 15
+
+      ## Number of jobs to keep in the dead queue (default=5000).
+      ## Jobs get into the dead queue after they failed and exhausted all retries.
+      ## Increasing this setting will increase the memory usage of Redis.
+      ## Once gone from the dead queue, a failed job is permanently lost and
+      ## cannot be retried manually.
+      # dead_jobs_limit: 1000
+
+      ## Number of seconds a job remains in the dead queue (default=3628800 (six weeks)).
+      ## Jobs get into the dead queue after they failed and exhausted all retries.
+      ## Increasing this setting will increase the memory usage of Redis.
+      ## Once gone from the dead queue, a failed job is permanently lost and
+      ## cannot be retried manually.
+      # dead_jobs_timeout: 15552000 # 6 months
 
       ## Log file for Sidekiq (default="log/sidekiq.log")
       #log: "log/sidekiq.log"
@@ -574,8 +588,7 @@ configuration: ## Section
     #sender_address: 'no-reply@example.org'
 
     ## This selects which mailer should be used. Use 'smtp' for a smtp
-    ## connection, 'sendmail' to use the sendmail binary or
-    ## 'messagebus' to use the messagebus service.
+    ## connection or 'sendmail' to use the sendmail binary.
     #method: 'smtp'
 
     ## Ignore if method isn't 'smtp'.
@@ -617,9 +630,6 @@ configuration: ## Section
 
       ## Use exim and sendmail (default=false)
       #exim_fix: false
-
-    ## Ignore if method isn't 'messagebus'
-    #message_bus_api_key: 'abcdef'
 
   ## Administrator settings
   admins: ## Section
