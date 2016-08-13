@@ -43,6 +43,7 @@ class Post < ActiveRecord::Base
     ) #note should include root and photos, but i think those are both on status_message
   }
 
+  scope :all_public, -> { where(public: true) }
 
   scope :commented_by, ->(person)  {
     select('DISTINCT posts.*')
@@ -54,20 +55,11 @@ class Post < ActiveRecord::Base
     joins(:likes).where(:likes => {:author_id => person.id})
   }
 
-  def self.visible_from_author(author, current_user=nil)
-    if current_user.present?
-      current_user.posts_from(author)
-    else
-      author.posts.all_public
-    end
-  end
-
   def post_type
     self.class.name
   end
 
   def root; end
-  def raw_message; ""; end
   def mentioned_people; []; end
   def photos; []; end
 
@@ -136,10 +128,6 @@ class Post < ActiveRecord::Base
 
   def self.diaspora_initialize(params)
     new(params.to_hash.stringify_keys.slice(*column_names, "author"))
-  end
-
-  def activity_streams?
-    false
   end
 
   def comment_email_subject

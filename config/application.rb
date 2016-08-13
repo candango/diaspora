@@ -70,7 +70,7 @@ module Diaspora
       contact-list.js
       ie.js
       inbox.js
-      jquery.js
+      jquery2.js
       jquery_ujs.js
       jquery-textchange.js
       main.js
@@ -106,6 +106,8 @@ module Diaspora
       host:     AppConfig.pod_uri.authority
     }
     config.action_mailer.asset_host = AppConfig.pod_uri.to_s
+
+    config.action_view.raise_on_missing_translations = true
 
     config.middleware.use Rack::OAuth2::Server::Resource::Bearer, "OpenID Connect" do |req|
       Api::OpenidConnect::OAuthAccessToken

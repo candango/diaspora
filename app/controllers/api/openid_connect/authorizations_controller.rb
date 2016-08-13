@@ -53,7 +53,6 @@ module Api
       def reset_auth(auth)
         return unless auth
         auth.o_auth_access_tokens.destroy_all
-        auth.id_tokens.destroy_all
         auth.code_used = false
         auth.save
       end
@@ -203,7 +202,7 @@ module Api
         if prompt && prompt.include?("none")
           handle_prompt_none
         elsif prompt && prompt.include?("login")
-          new_params = params.merge!(prompt: prompt.remove("login"))
+          new_params = params.except("controller", "action").merge(prompt: prompt.remove("login"))
           reauthenticate(new_params)
         else
           authenticate_user!
