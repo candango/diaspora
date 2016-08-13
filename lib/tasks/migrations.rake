@@ -127,4 +127,30 @@ namespace :migrations do
       tag.destroy
     end
   end
+
+  CURRENT_QUEUES = %w(urgent high medium low default).freeze
+
+  desc "Migrate sidekiq jobs, retries, scheduled and dead jobs from any legacy queue to "\
+       "the default queue (retries all dead jobs)"
+  task :legacy_queues do
+    # Push all retries, scheduled and dead jobs to their queues
+    Sidekiq::RetrySet.new.retry_all
+    Sidekiq::DeadSet.new.retry_all
+    Sidekiq::ScheduledSet.new.reject {|job| CURRENT_QUEUES.include? job.queue }.each(&:add_to_queue)
+
+    # Move all jobs from legacy queues to the default queue
+    Sidekiq::Queue.all.each do |queue|
+      next if CURRENT_QUEUES.include? queue.name
+
+      puts "Migrating #{queue.size} jobs from #{queue.name} to default..."
+      queue.each do |job|
+        job.item["queue"] = "default"
+        Sidekiq::Client.push(job.item)
+        job.delete
+      end
+
+      # Delete the queue
+      queue.clear
+    end
+  end
 end
