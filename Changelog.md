@@ -166,6 +166,7 @@ The command will report queues that still have jobs and launch sidekiq process f
 * Correctly filter mentions on the server side [#6902](https://github.com/diaspora/diaspora/pull/6902)
 * Add aspects to the aspect membership dropdown when creating them on the getting started page [#6864](https://github.com/diaspora/diaspora/pull/6864)
 * Strip markdown from message preview in conversations list [#6923](https://github.com/diaspora/diaspora/pull/6923)
+* Improve tag stream performance [#6903](https://github.com/diaspora/diaspora/pull/6903)
 
 ## Features
 * Support color themes [#6033](https://github.com/diaspora/diaspora/pull/6033)
@@ -197,6 +198,8 @@ The command will report queues that still have jobs and launch sidekiq process f
 * Make screenreaders read alerts [#6973](https://github.com/diaspora/diaspora/pull/6973)
 * Display message when there are no posts in a stream [#6974](https://github.com/diaspora/diaspora/pull/6974)
 * Add bootstrap-markdown editor to the publisher [#6551](https://github.com/diaspora/diaspora/pull/6551)
+* Don't create notifications for ignored users [#6984](https://github.com/diaspora/diaspora/pull/6984)
+* Fetch missing persons when receiving a mention for them [#6992](https://github.com/diaspora/diaspora/pull/6992)
 
 # 0.5.10.2
 
