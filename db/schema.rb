@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161015174300) do
+ActiveRecord::Schema.define(version: 20161107100840) do
 
   create_table "account_deletions", force: :cascade do |t|
     t.string   "diaspora_handle", limit: 255
@@ -204,13 +204,14 @@ ActiveRecord::Schema.define(version: 20161015174300) do
   end
 
   create_table "mentions", force: :cascade do |t|
-    t.integer "post_id",   limit: 4, null: false
-    t.integer "person_id", limit: 4, null: false
+    t.integer "mentions_container_id",   limit: 4,   null: false
+    t.integer "person_id",               limit: 4,   null: false
+    t.string  "mentions_container_type", limit: 255, null: false
   end
 
-  add_index "mentions", ["person_id", "post_id"], name: "index_mentions_on_person_id_and_post_id", unique: true, using: :btree
+  add_index "mentions", ["mentions_container_id", "mentions_container_type"], name: "index_mentions_on_mc_id_and_mc_type", length: {"mentions_container_id"=>nil, "mentions_container_type"=>191}, using: :btree
+  add_index "mentions", ["person_id", "mentions_container_id", "mentions_container_type"], name: "index_mentions_on_person_and_mc_id_and_mc_type", unique: true, length: {"person_id"=>nil, "mentions_container_id"=>nil, "mentions_container_type"=>191}, using: :btree
   add_index "mentions", ["person_id"], name: "index_mentions_on_person_id", using: :btree
-  add_index "mentions", ["post_id"], name: "index_mentions_on_post_id", using: :btree
 
   create_table "messages", force: :cascade do |t|
     t.integer  "conversation_id",  limit: 4,     null: false
@@ -358,18 +359,19 @@ ActiveRecord::Schema.define(version: 20161015174300) do
   add_index "photos", ["status_message_guid"], name: "index_photos_on_status_message_guid", length: {"status_message_guid"=>191}, using: :btree
 
   create_table "pods", force: :cascade do |t|
-    t.string   "host",          limit: 255,                                 null: false
+    t.string   "host",            limit: 255,                                 null: false
     t.boolean  "ssl"
-    t.datetime "created_at",                                                null: false
-    t.datetime "updated_at",                                                null: false
-    t.integer  "status",        limit: 4,   default: 0
-    t.datetime "checked_at",                default: '1970-01-01 00:00:00'
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
+    t.integer  "status",          limit: 4,   default: 0
+    t.datetime "checked_at",                  default: '1970-01-01 00:00:00'
     t.datetime "offline_since"
-    t.integer  "response_time", limit: 4,   default: -1
-    t.string   "software",      limit: 255
-    t.string   "error",         limit: 255
-    t.integer  "port",          limit: 4
-    t.boolean  "blocked",                   default: false
+    t.integer  "response_time",   limit: 4,   default: -1
+    t.string   "software",        limit: 255
+    t.string   "error",           limit: 255
+    t.integer  "port",            limit: 4
+    t.boolean  "blocked",                     default: false
+    t.boolean  "scheduled_check",             default: false,                 null: false
   end
 
   add_index "pods", ["checked_at"], name: "index_pods_on_checked_at", using: :btree
