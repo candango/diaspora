@@ -138,7 +138,7 @@ en:
       daily: "Daily"
       usage_statistic: "Usage statistics"
       go: "Go"
-      display_results: "Displaying results from the <b>%{segment}</b> segment"
+      display_results: "Displaying results from the %{segment} segment"
       posts:
         zero: "%{count} posts"
         one: "%{count} post"
@@ -155,9 +155,9 @@ en:
         zero: "%{count} users"
         one: "%{count} user"
         other: "%{count} users"
-      current_segment: "The current segment is averaging <b>%{post_yest}</b> posts per user, from <b>%{post_day}</b>"
+      current_segment: "The current segment is averaging %{post_yest} posts per user, from %{post_day}"
       50_most: "50 most popular tags"
-      tag_name: "Tag name: <b>%{name_tag}</b> Count: <b>%{count_tag}</b>"
+      tag_name: "Tag name: %{name_tag} Count: %{count_tag}"
     pods:
       pod_network: "Pod network"
   aspects:
@@ -245,11 +245,6 @@ en:
     new_comment:
       comment: "Comment"
       commenting: "Commenting..."
-
-  reactions:
-    zero: "No reactions"
-    one: "1 reaction"
-    other: "%{count} reactions"
 
   contacts:
     index:
@@ -596,6 +591,8 @@ en:
   likes:
     create:
       error: "Failed to like."
+    destroy:
+      error: "Failed to unlike."
 
   notifications:
     started_sharing:
@@ -715,12 +712,23 @@ en:
       body: |-
         Hello %{name},
 
-        We received a request with a wrong/missing CSRF token from your account. To prevent any possible damage you have been logged out.
+        diaspora* has detected an attempt to access your session which might be unauthorised. To avoid any chance of your data being compromised, you have been signed out. Don’t worry; you can safely sign in again now.
+
+        A request has been made using a incorrect or missing CSRF token. This might be completely innocent, but it could be a cross-site request forgery (CSRF) attack.
+
+        This could have been caused by:
+
+          - An add-on manipulating the request or making requests without the token;
+          - A tab left open from a past session;
+          - Another website making requests, with or without your permission;
+          - Various other external tools;
+          - Malicious code trying to access your data.
 
         For more information on CSRF see [%{link}](%{link}).
 
-        Sorry,
+        If you see this message repeatedly, please check the points above, including any browser add-ons.
 
+        Thank you,
         The diaspora* email robot!
     report_email:
         type:
@@ -935,15 +943,15 @@ en:
 
   report:
     title: "Reports overview"
-    post_label: "<b>Post</b>: %{title}"
-    comment_label: "<b>Comment</b>:<br>%{data}"
+    post_label: "<b>Post</b>: %{content}"
+    comment_label: "<b>Comment</b>: %{data}"
     reported_label: "<b>Reported by</b> %{person}"
-    reason_label: "Reason: %{text}"
+    reason_label: "Reason:"
     review_link: "Mark as reviewed"
     delete_link: "Delete item"
     reported_user_details: "Details on reported user"
     confirm_deletion: "Are you sure to delete the item?"
-    not_found: "<u>The post/comment was not found. It seems that it was deleted by the user!</u>"
+    not_found: "The post/comment was not found. It seems that it was deleted by the user!"
     status:
       destroyed: "The post was destroyed"
       failed: "Something went wrong"
@@ -1132,6 +1140,7 @@ en:
       title: "#Followed tags"
       add_a_tag: "Add a tag"
       follow: "Follow"
+      all: "All tags"
 
     tags:
       title: "Posts tagged: %{tags}"
@@ -1144,6 +1153,7 @@ en:
 
     aspects:
       title: "My aspects"
+      all: "All aspects"
 
     activity:
       title: "My activity"
