@@ -306,12 +306,6 @@ configuration: ## Section
       #host: 'stats.example.org'
       #site_id: 1
 
-    ## Mixpanel event tracking (disabled by default).
-    #mixpanel_uid:
-
-    ## Chartbeat tracking (disabled by default).
-    #chartbeat_uid:
-
     ## Statistics
     ## Your pod will report its name, software version and whether
     ## or not registrations are open via /statistics.json.
@@ -429,6 +423,10 @@ configuration: ## Section
       #paypal_hosted_button_id: "change_me"
       ## OR encrypted key of unhosted button
       #paypal_unhosted_button_encrypted: "-----BEGIN PKCS7-----"
+
+    ## Liberapay.com is a free platform which allow donations like patreon
+    ## Set your username to include your liberapay button
+    # liberapay_username: "change_me"
 
     ## Bitcoin donations
     ## You can provide a bitcoin address here to allow your users to provide

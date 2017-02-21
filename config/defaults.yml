@@ -76,8 +76,6 @@ defaults:
       enable: false
       host:
       site_id:
-    mixpanel_uid:
-    chartbeat_uid:
     statistics:
       user_counts: false
       post_counts: false
@@ -105,6 +103,7 @@ defaults:
       currency: USD
       paypal_hosted_button_id:
       paypal_unhosted_button_encrypted:
+    liberapay_username:
     bitcoin_address:
     bitcoin_wallet_id: # DEPRECATED: Remove with 0.6
     community_spotlight:
