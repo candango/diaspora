@@ -2,20 +2,38 @@
 
 ## Refactor
 
+* Make the mention syntax more flexible [#7305](https://github.com/diaspora/diaspora/pull/7305)
+* Display @ before mentions [#7324](https://github.com/diaspora/diaspora/pull/7324)
+* Simplify mentions in the publisher [#7302](https://github.com/diaspora/diaspora/pull/7302)
+* Remove chartbeat and mixpanel support [#7280](https://github.com/diaspora/diaspora/pull/7280)
+
 ## Bug fixes
 
 ## Features
 * Add support for mentions in comments to the backend [#6818](https://github.com/diaspora/diaspora/pull/6818)
+* Add support for new mention syntax [#7300](https://github.com/diaspora/diaspora/pull/7300)
+* Render mentions as links in comments [#7327](https://github.com/diaspora/diaspora/pull/7327)
 
 # 0.6.4.0
 
 ## Refactor
+* Unify link colors [#7318](https://github.com/diaspora/diaspora/pull/7318)
+* Increase time to wait before showing the hovercard [#7319](https://github.com/diaspora/diaspora/pull/7319)
+* Remove some unused color-theme overrides [#7325](https://github.com/diaspora/diaspora/pull/7325)
+* Change color of author-name on hover [#7326](https://github.com/diaspora/diaspora/pull/7326)
+* Add like and reshare services [#7337](https://github.com/diaspora/diaspora/pull/7337)
 
 ## Bug fixes
 * Fix path to `bundle` in `script/server` [#7281](https://github.com/diaspora/diaspora/pull/7281)
 * Update comment in database example config [#7282](https://github.com/diaspora/diaspora/pull/7282)
+* Make the \#newhere post public again [#7311](https://github.com/diaspora/diaspora/pull/7311)
+* Remove whitespace from author link [#7330](https://github.com/diaspora/diaspora/pull/7330)
+* Fix autosize in modals [#7339](https://github.com/diaspora/diaspora/pull/7339)
+* Only display invite link on contacts page if invitations are enabled [#7342](https://github.com/diaspora/diaspora/pull/7342)
 
 ## Features
+* Add support for [Liberapay](https://liberapay.com) donations [#7290](https://github.com/diaspora/diaspora/pull/7290)
+* Added a link to the community guidelines :) [#7298](https://github.com/diaspora/diaspora/pull/7298)
 
 # 0.6.3.0
 
@@ -36,6 +54,7 @@
 
 ## Features
 * Add links to the aspects and followed tags pages on mobile [#7265](https://github.com/diaspora/diaspora/pull/7265)
+* diaspora\* is now available in Gàidhlig, Occitan, and Schwiizerdütsch
 
 # 0.6.2.0
 
