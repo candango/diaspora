@@ -14,6 +14,16 @@
 * Add support for new mention syntax [#7300](https://github.com/diaspora/diaspora/pull/7300)
 * Render mentions as links in comments [#7327](https://github.com/diaspora/diaspora/pull/7327)
 
+# 0.6.5.0
+
+## Refactor
+* Remove unused setPreload function [#7354](https://github.com/diaspora/diaspora/pull/7354)
+* Remove jQuery deprecations [#7356](https://github.com/diaspora/diaspora/pull/7356)
+
+## Bug fixes
+
+## Features
+
 # 0.6.4.0
 
 ## Refactor
@@ -30,6 +40,8 @@
 * Remove whitespace from author link [#7330](https://github.com/diaspora/diaspora/pull/7330)
 * Fix autosize in modals [#7339](https://github.com/diaspora/diaspora/pull/7339)
 * Only display invite link on contacts page if invitations are enabled [#7342](https://github.com/diaspora/diaspora/pull/7342)
+* Fix regex for hashtags for some languages [#7350](https://github.com/diaspora/diaspora/pull/7350)
+* Create asterisk.png without digest after precompile [#7322](https://github.com/diaspora/diaspora/pull/7322)
 
 ## Features
 * Add support for [Liberapay](https://liberapay.com) donations [#7290](https://github.com/diaspora/diaspora/pull/7290)
