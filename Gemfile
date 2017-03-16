@@ -2,14 +2,18 @@ source "https://rubygems.org"
 
 gem "rails", "4.2.8"
 
+gem "ads-rails"
+
 # Legacy Rails features, remove me!
 # responders (class level)
 gem "responders", "2.3.0"
 
 # Appserver
 
-gem "unicorn", "5.2.0", require: false
-gem "unicorn-worker-killer", "0.4.4"
+
+#gem "unicorn", "5.2.0", require: false
+#gem "unicorn-worker-killer", "0.4.4"
+gem "passenger", "5.1.2", require: false
 
 # Federation
 
@@ -69,6 +73,10 @@ end
 
 
 gem "activerecord-import", "0.17.1"
+
+# Redis
+
+gem "redis", "3.3.0"
 
 # File uploading
 
