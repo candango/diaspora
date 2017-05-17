@@ -17,7 +17,7 @@ gem "passenger", "5.1.2", require: false
 
 # Federation
 
-gem "diaspora_federation-rails", "0.1.8"
+gem "diaspora_federation-rails", "0.1.9"
 
 # API and JSON
 
@@ -191,8 +191,8 @@ gem "typhoeus",           "1.1.2"
 gem "gon",                     "6.1.0"
 gem "hamlit",                  "2.8.0"
 gem "mobile-fu",               "1.3.1"
+gem "rails-timeago",           "2.16.0"
 gem "will_paginate",           "3.1.5"
-gem "rails-timeago",           "2.11.0"
 
 # Logging
 
@@ -225,10 +225,6 @@ gem "thor", "0.19.1"
 # gem "therubyracer", :platform => :ruby
 
 group :production do # we don"t install these on travis to speed up test runs
-  # Administration
-
-  gem "rails_admin", "0.8.1"
-
   # Analytics
 
   gem "rack-google-analytics", "1.2.0"
@@ -296,7 +292,6 @@ group :test do
   gem "poltergeist",        "1.13.0"
 
   gem "cucumber-api-steps", "0.13", require: false
-  gem "json_spec", "1.1.4"
 
   # General helpers
 
@@ -305,7 +300,7 @@ group :test do
   gem "webmock",            "2.3.2", require: false
   gem "shoulda-matchers",   "3.1.1"
 
-  gem "diaspora_federation-test", "0.1.8"
+  gem "diaspora_federation-test", "0.1.9"
 
   # Coverage
   gem 'coveralls', require: false
