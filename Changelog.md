@@ -9,14 +9,37 @@
 * Upgrade to jQuery 3 [#7303](https://github.com/diaspora/diaspora/pull/7303)
 * Add i18n for color themes [#7369](https://github.com/diaspora/diaspora/pull/7369)
 * Remove deprecated statistics.json [#7399](https://github.com/diaspora/diaspora/pull/7399)
+* Always link comment count text on mobile [#7483](https://github.com/diaspora/diaspora/pull/7483)
+* Switch to new federation protocol [#7436](https://github.com/diaspora/diaspora/pull/7436)
 
 ## Bug fixes
+
+* Fix height too high on mobile SPV [#7480](https://github.com/diaspora/diaspora/pull/7480)
 
 ## Features
 * Add support for mentions in comments to the backend [#6818](https://github.com/diaspora/diaspora/pull/6818)
 * Add support for new mention syntax [#7300](https://github.com/diaspora/diaspora/pull/7300) [#7394](https://github.com/diaspora/diaspora/pull/7394)
 * Render mentions as links in comments [#7327](https://github.com/diaspora/diaspora/pull/7327)
 * Add support for mentions in comments to the front-end [#7386](https://github.com/diaspora/diaspora/pull/7386)
+
+# 0.6.8.0
+
+## Refactor
+
+## Bug fixes
+
+## Features
+
+# 0.6.7.0
+
+## Refactor
+* Cleanup some translations [#7465](https://github.com/diaspora/diaspora/pull/7465)
+
+## Features
+* Change email without confirmation when mail is disabled [#7455](https://github.com/diaspora/diaspora/pull/7455)
+* Warn users if they leave the profile editing page with unsaved changes [#7473](https://github.com/diaspora/diaspora/pull/7473)
+* Add admin pages to the mobile interface [#7295](https://github.com/diaspora/diaspora/pull/7295)
+* Add links to discourse to footer and sidebar [#7446](https://github.com/diaspora/diaspora/pull/7446)
 
 # 0.6.6.0
 
@@ -32,6 +55,7 @@
 * Fix welcome message when podmin is set to an invalid username [#7452](https://github.com/diaspora/diaspora/pull/7452)
 
 ## Features
+* Add support for Nodeinfo 2.0 [#7447](https://github.com/diaspora/diaspora/pull/7447)
 
 # 0.6.5.0
 

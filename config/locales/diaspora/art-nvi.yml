@@ -48,7 +48,6 @@ art-nvi:
   cancel: "Ftang"
   contacts:
     index:
-      add_a_new_aspect: "Ngop ponguti amip"
       all_contacts: "Nìwotx Eylan"
       my_contacts: "Oeyä Eylan"
       start_a_conversation: "Ngal sngä'i tìpängkxoti"
@@ -115,8 +114,6 @@ art-nvi:
     invitations:
       by_email: "ìlä email"
       invite_your_friends: "pawm ngeyä eylanti fìtseng"
-    publisher:
-      upload_photos: "Fpe' relit"
     stream_element:
       via: "ìlä %{link}"
   streams:
