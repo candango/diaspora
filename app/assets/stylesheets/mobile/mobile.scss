@@ -55,7 +55,6 @@ textarea { resize: vertical; }
   overflow: auto;
   position: relative;
   text-align: left;
-  min-height: 34px;
   padding: 10px 0 0 0;
   list-style: none;
 
@@ -885,3 +884,9 @@ select#aspect_ids_ {
 .form-control:active, .form-control:focus { border-color: #999999; }
 
 .tag_following_action { margin: 5px 0 10px 0; }
+
+// --- Admin pages ---
+.pod-version {
+  // The fetching of the pod version is not done on mobile currently so we hide this alert.
+  display: none;
+}

@@ -17,7 +17,7 @@ gem "passenger", "5.1.2", require: false
 
 # Federation
 
-gem "diaspora_federation-rails", "0.1.9"
+gem "diaspora_federation-rails", "0.2.0"
 
 # API and JSON
 
@@ -120,6 +120,7 @@ source "https://rails-assets.org" do
 
   gem "rails-assets-autosize",                            "3.0.20"
   gem "rails-assets-blueimp-gallery",                     "2.25.0"
+  gem "rails-assets-jquery.are-you-sure",                 "1.9.0"
   gem "rails-assets-jquery-placeholder",                  "2.3.1"
   gem "rails-assets-jquery-textchange",                   "0.2.3"
   gem "rails-assets-perfect-scrollbar",                   "0.6.16"
@@ -140,7 +141,7 @@ gem "leaflet-rails",       "0.7.7"
 
 # Parsing
 
-gem "nokogiri",          "1.7.1"
+gem "nokogiri",          "1.7.2"
 gem "open_graph_reader", "0.6.2" # also update User-Agent in features/support/webmock.rb
 gem "redcarpet",         "3.4.0"
 gem "ruby-oembed",       "0.10.1"
@@ -254,13 +255,13 @@ group :development do
   gem "rb-inotify",     "0.9.8", require: false
 
   # Linters
-  gem "haml_lint",      "0.21.0"
-  gem "pronto",         "0.8.2"
-  gem "pronto-eslint",  "0.8.0"
-  gem "pronto-haml",    "0.8.0"
-  gem "pronto-rubocop", "0.8.0"
-  gem "pronto-scss",    "0.8.0", require: false
-  gem "rubocop",        "0.47.1"
+  gem "haml_lint",      "0.24.0", require: false
+  gem "pronto",         "0.9.3", require: false
+  gem "pronto-eslint",  "0.9.1", require: false
+  gem "pronto-haml",    "0.9.0", require: false
+  gem "pronto-rubocop", "0.9.0", require: false
+  gem "pronto-scss",    "0.9.1", require: false
+  gem "rubocop",        "0.48.1", require: false
 
   # Preloading environment
 
@@ -300,7 +301,7 @@ group :test do
   gem "webmock",            "2.3.2", require: false
   gem "shoulda-matchers",   "3.1.1"
 
-  gem "diaspora_federation-test", "0.1.9"
+  gem "diaspora_federation-test", "0.2.0"
 
   # Coverage
   gem 'coveralls', require: false

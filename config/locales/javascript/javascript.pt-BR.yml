@@ -170,8 +170,9 @@ pt-BR:
       empty: "{file} está vazio, por favor selecione arquivos novamente sem este."
       error: "Ocorreu um problema ao fazer upload do arquivo <%= file %>"
       invalid_ext: "{file} possui extensão inválida. Somente {extensions} são permitidas."
-      looking_good: "OMG, veja você é incrível!"
+      looking_good: "Uau, arrasou!"
       size_error: "{file} é muito grande, o tamanho máximo do arquivo é {sizeLimit}."
+      upload_photos: "Subir fotos"
     poll:
       answer_count:
         one: "Um voto"
@@ -199,7 +200,6 @@ pt-BR:
       you_have_no_tags: "Você não tem tags!"
     publisher:
       add_option: "Adicionar uma resposta"
-      limited: "Limitada: a sua publicação será visível apenas para as pessoas com quem você compartilha."
       markdown_editor:
         preview: "Pré-visualizar"
         texts:
@@ -231,7 +231,6 @@ pt-BR:
       mention_success: "Mencionados com sucesso: <%= names %>"
       near_from: "Publicado de: <%= location %>"
       option: "Resposta"
-      public: "Pública: a sua publicação será totalmente visível na Web e poderá ser encontrada por meio de mecanismos de buscas"
       question: "Pergunta"
     remove_post: "Remover esta publicação?"
     report:

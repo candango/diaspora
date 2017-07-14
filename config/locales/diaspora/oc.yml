@@ -31,10 +31,6 @@ oc:
           attributes:
             poll:
               already_participated: "Avètz ja paticipat a aquel sondatge !"
-        request:
-          attributes:
-            from_id:
-              taken: "es un doblon d'una requèsta qu'existís ja."
         reshare:
           attributes:
             root_guid:
@@ -62,6 +58,8 @@ oc:
       fetching_diaspora_version: "A determinar la darrièra version de diaspora*..."
       pod_status: "Estat del pod"
     pods:
+      pod_desktop_link: "vista complèta"
+      pod_desktop_view: "Aquesta pagina es pas disponibla en vista pel mobil, mercés de cambiar per la %{desktop_link}."
       pod_network: "Ret del pod"
     stats:
       2weeks: "2 setmanas"
@@ -233,6 +231,8 @@ oc:
         here_to_help: "La comunautat diaspora* es aquí !"
         mail_podmin: "Corrièl del podmin"
         need_help: "Besonh d'ajuda ?"
+        support_forum: "Podètz tanben contactar lo %{support_forum}."
+        support_forum_link: "forum d’assisténcia"
         tag_bug: "bug"
         tag_feature: "suggestion"
         tag_question: "question"
@@ -282,7 +282,6 @@ oc:
       commenting: "Comentari en cors de mandadís..."
   contacts:
     index:
-      add_a_new_aspect: "Apondre un aspècte novèl"
       add_contact: "Apondre un contacte"
       all_contacts: "Totes los contactes"
       community_spotlight: "Actualitat de la comunautat"
@@ -616,6 +615,7 @@ oc:
     application:
       back_to_top: "Tornar amont"
       be_excellent: "Siatz benvolent amb cadun !"
+      discourse: "Discutidas e assisténcia del projècte"
       powered_by: "Propulsat per dispora*"
       public_feed: "Flux diaspora* public per %{name}"
       source_package: "Telecargatz lo còdi font"
@@ -686,7 +686,6 @@ oc:
       one: "%{actors} vos a mencionat sus una publicacion suprimida."
       other: "%{actors} vos an mencionat sus una publicacion suprimida."
       zero: "%{actors} vos a mencionat sus una publicacion suprimida."
-    post: "publicacion"
     private_message:
       one: "%{actors} vos a mandat un messatge."
       other: "%{actors} vos an mandat un messatge."
@@ -717,6 +716,26 @@ oc:
       click_link: "Per activar vòstre novèla adreça de corrièl %{unconfirmed_email}, seguissètz aqueste ligam :"
       subject: "Mercés d'activar vòstre novèl corrièl %{unconfirmed_email}"
     csrf_token_fail:
+      body: |-
+          Adissiatz %{name}, 
+
+          diaspora* a detectat un ensag d’accès a vòstre sesilha que poiriá èsser pas autorizat. Per evitar que vòstras donadas siasguen gastadas sètz estat desconnectat. Vos copetz pas lo cap, vos podètz tornar connectar en seguretat ara. 
+           
+          Una demanda es estada facha n’emplegant un geton CSRF incorrècte o absent. Aquò poiriá èsser completament innocent, mai aquò pòt tanben èsser un atac apelat Cross-site request forgery (CSRF). 
+           
+          Aquò pòt venir de : 
+           
+            - una extension que manipula la demanda o que fa de demanda sens lo geton;
+            - un onglet daissat dubèrt d’una anciana sesilha;
+            - un fum d’aisinas extèrnas;
+            - un marrit còdi qu’ensaja d'accedir a vòstras donadas. 
+           
+          Per mai informacion subre l’atac CSRF vejatz [%{link}](%{link}). 
+           
+          Se tenètz vist aqueste messatge, mercés de verificar los punts al dessús, inclús las extensions de qual que siague navigador. 
+           
+          Mercés, 
+          Lo robòt de corrièl a diaspora* !
       subject: "Avèm recebut una demanda sens autorizacion de vòstre compte, %{name}"
     email_sent_by_diaspora: "Aqueste corrièl es estat mandat per %{pod_name}. Se volètz pas mai de corrièls atal,"
     export_email:
@@ -1032,8 +1051,7 @@ oc:
       posting: "Publicacion..."
       remove_location: "Suprimir l'emplaçament"
       share: "Partejar"
-      upload_photos: "Mandar de fòtos"
-      whats_on_your_mind: "A qué pensatz ?"
+      whats_on_your_mind: "A de qué pensatz ?"
     stream_element:
       via: "Via %{link}"
       via_mobile: "Enviat d'un mobil"
@@ -1069,6 +1087,8 @@ oc:
   streams:
     activity:
       title: "Mon activitat"
+    admin:
+      title: "Administracion"
     aspects:
       all: "Totes los aspèctes"
       title: "Mos aspèctes"
@@ -1176,7 +1196,7 @@ oc:
       connect_to_facebook: "Podèm accelerar un pauc las causas de %{link} sus diaspora*. Aquò botarà vòstre nom e foto, e activar la publicacion multiplataforma."
       connect_to_facebook_link: "Connexion amb vòtre compte Facebook en cors"
       hashtag_explanation: "Las etiquetas vos permeton de charrar e seguir vòstres interèsses.  Son tanben una bona manièra de trobar de mond novèl sus diaspora*."
-      hashtag_suggestions: "Ensejatz etiquetas coma aquestas #art #filmes #gif, etc."
+      hashtag_suggestions: "Ensajatz etiquetas coma aquestas #art #filmes #gif, etc."
       well_hello_there: "E ben, adiu monde !"
       what_are_you_in_to: "Qué vos interèssa ?"
       who_are_you: "Qual sètz ?"
