@@ -2,8 +2,6 @@ source "https://rubygems.org"
 
 gem "rails", "5.1.3"
 
-gem "ads-rails"
-
 # Legacy Rails features, remove me!
 # responders (class level)
 gem "responders", "2.4.0"
