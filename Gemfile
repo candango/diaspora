@@ -72,13 +72,10 @@ end
 
 
 gem "activerecord-import", "0.19.1"
-<<<<<<< HEAD
 
 # Redis
 
 gem "redis", "3.3.0"
-=======
->>>>>>> 974fbd4d0391609f0bdee5b5ba15f2bba6defb3d
 
 # File uploading
 
