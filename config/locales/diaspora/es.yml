@@ -449,6 +449,10 @@ es:
       format_text_q: "¿Cómo puedo formatear el texto en mis publicaciones (negrita, italica, etc.)?"
       hide_posts_a: "Si apuntas tu mouse a la parte superior de una publicación, una X aparecerá en la derecha. Hazle click para ocultar la publicación y silenciar las notificaciones relacionadas. Puedes aún asi ver la publicación si visitas la pagina de perfil de la persona que le publico."
       hide_posts_q: "¿Cómo oculto una publicación?"
+      ignore_user_a1: "Si estás compartiendo con esas personas, eliminarles de tus aspectos detendrá la aparición de sus post en tu stream. Un método más completo es \"ignorar\" esas cuentas. Esto impedirá que cualquiera de sus post aparezcan en tu stream, y ellos no podrán darle a Like o comentar tus post. Ellos podrán, sin embargo, compartir tus post, comentar tus post que hayan compartido otros, y sus comenatrios en los post de otras personas que aparezcan en tu stream serán visibles para ti."
+      ignore_user_a2: "Para ignorar una cuenta, pulsa el icono \"ignorar\" (un círculo con una línea diagonal atravesándolo) en la parte superior derecha de alguno de sus post. Sus post instantáneamente desaparecerán de stream. Alternativamente, ve a su página de perfil y pulsa en el botón de ignorar allí. Tu todavía podrás ver sus post en la página de su perfil, o usando la vista de único-post."
+      ignore_user_a3: "La lista de personas que has ignorado puedes verla en los ajustes de tu cuenta, en la sección Privacidad. Para dejar de ignorar a alguien, bórrale de la lista en esa página."
+      ignore_user_q: "¿Cómo puedo impedir que los post de una persona aparezcan en mi stream?"
       insert_images_a: "Haz click en el pequeño ícono de la camara para insertar una imagen en una publicación. Presiona la foto otra ves para agregar otra foto, o puedes seleccionar multipes fotos para subir de una vez."
       insert_images_comments_a: "Puedes usar Markdown para insertar una imagen desde la web en un comentario, como en los posts. Sin embargo, no puedes subir imágenes de tu ordenador directamente a los comentarios. Súbelas a un servicio de almacenamiento de imágenes y entonces insértales usando el botón de imagen encima del editor."
       insert_images_comments_q: "¿Puedo insertar imágenes en los comentarios?"
@@ -632,6 +636,10 @@ es:
       one: "%{actors} ha comentado tu %{post_link}."
       other: "%{actors} han comentado tu %{post_link}."
       zero: "%{actors} comentarios en tu %{post_link}."
+    contacts_birthday:
+      one: "%{actors} persona cumple años el %{date}."
+      other: "%{actors} cumplen años el %{date}."
+      zero: "%{actors} personas cumplen años el %{date}."
     index:
       all_notifications: "Todas las Notificaciones"
       also_commented: "Otros comentarios"
@@ -641,6 +649,7 @@ es:
         other: "y %{count} más"
         zero: "y nadie más"
       comment_on_post: "Comentar en el post"
+      contacts_birthday: "Cumpleaños"
       liked: "Te gustó"
       mark_all_as_read: "Marcar todo como leído"
       mark_all_shown_as_read: "Marcar todos como leídos"
@@ -698,6 +707,10 @@ es:
     confirm_email:
       click_link: "Para activar tu nueva dirección de correo %{unconfirmed_email}, sigue este enlace:"
       subject: "Por favor activa tu nueva dirección de correo %{unconfirmed_email}"
+    contacts_birthday:
+      birthday: "%{name} cumplen años hoy. Deséales un \"¡Feliz cumpleaños!\""
+      subject: "%{name} cumple años hoy"
+      view_profile: "Ver el perfil de %{name}"
     csrf_token_fail:
       body: |-
           Hola %{name},
@@ -1128,6 +1141,7 @@ es:
       also_commented: "alguien comenta en una publicación que has comentado"
       auto_follow_aspect: "Aspecto para los usuarios seguidos automáticamente:"
       auto_follow_back: "Seguir automáticamente a los usuarios que te sigan"
+      birthday: "alguien cumple años hoy"
       change: "Cambiar"
       change_color_theme: "Cambiar el color del tema"
       change_email: "Cambiar correo"
