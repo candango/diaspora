@@ -95,6 +95,13 @@ module Diaspora
       def normalize
         @message = self.class.normalize(@message)
       end
+
+      def diaspora_links
+        @message = @message.gsub(DiasporaFederation::Federation::DiasporaUrlParser::DIASPORA_URL_REGEX) {|match_str|
+          guid = Regexp.last_match(3)
+          Regexp.last_match(2) == "post" && Post.exists?(guid: guid) ? AppConfig.url_to("/posts/#{guid}") : match_str
+        }
+      end
     end
 
     DEFAULTS = {mentioned_people: [],
@@ -158,6 +165,7 @@ module Diaspora
     def plain_text opts={}
       process(opts) {
         make_mentions_plain_text
+        diaspora_links
         squish
         append_and_truncate
       }
@@ -167,6 +175,7 @@ module Diaspora
     def plain_text_without_markdown opts={}
       process(opts) {
         make_mentions_plain_text
+        diaspora_links
         strip_markdown
         squish
         append_and_truncate
@@ -177,6 +186,7 @@ module Diaspora
     def plain_text_for_json opts={}
       process(opts) {
         normalize
+        diaspora_links
         camo_urls if AppConfig.privacy.camo.proxy_markdown_images?
       }
     end
@@ -186,6 +196,7 @@ module Diaspora
       process(opts) {
         escape
         normalize
+        diaspora_links
         render_mentions
         render_tags
         squish
@@ -198,6 +209,7 @@ module Diaspora
       process(opts) {
         process_newlines
         normalize
+        diaspora_links
         camo_urls if AppConfig.privacy.camo.proxy_markdown_images?
         markdownify
         render_mentions

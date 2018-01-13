@@ -40,7 +40,7 @@ class NotificationsController < ApplicationController
 
       pager.replace(result)
     end
-    @group_days = @notifications.group_by{|note| note.created_at.strftime('%Y-%m-%d')}
+    @group_days = @notifications.group_by {|note| note.updated_at.strftime("%Y-%m-%d") }
 
     @unread_notification_count = current_user.unread_notifications.count
 
@@ -104,7 +104,8 @@ class NotificationsController < ApplicationController
       "mentioned"            => "Notifications::MentionedInPost",
       "mentioned_in_comment" => "Notifications::MentionedInComment",
       "reshared"             => "Notifications::Reshared",
-      "started_sharing"      => "Notifications::StartedSharing"
+      "started_sharing"      => "Notifications::StartedSharing",
+      "contacts_birthday"    => "Notifications::ContactsBirthday"
     }
   end
   helper_method :types
