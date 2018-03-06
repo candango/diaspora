@@ -153,7 +153,7 @@ module Diaspora
             guid:       entity.guid,
             created_at: entity.created_at,
             root_guid:  entity.root_guid
-          )
+          ).tap {|reshare| send_participation_for(reshare) }
         end
       end
 
@@ -193,6 +193,8 @@ module Diaspora
             status_message.photos = save_or_load_photos(entity.photos)
 
             status_message.save!
+
+            send_participation_for(status_message)
           end
         end
       end
@@ -270,10 +272,19 @@ module Diaspora
         end
       end
 
+      # This are property names that are known by the +diaspora_federation+ library as properties but not
+      # specially stored in our database and therefore need to be stored in the +additional_data+ field.
+      UNKNOWN_PROPERTIES_NAMES = %i[edited_at].freeze
+      private_constant :UNKNOWN_PROPERTIES_NAMES
+
       private_class_method def self.build_signature(klass, entity)
+        special_additional_data = UNKNOWN_PROPERTIES_NAMES.map {|name|
+          [name.to_s, entity.public_send(name)] if entity.respond_to?(name) && entity.signature_order.include?(name)
+        }.compact.to_h
+
         klass.reflect_on_association(:signature).klass.new(
           author_signature: entity.author_signature,
-          additional_data:  entity.additional_data,
+          additional_data:  entity.additional_data.merge(special_additional_data),
           signature_order:  SignatureOrder.find_or_create_by!(order: entity.signature_order.join(" "))
         )
       end
@@ -327,6 +338,24 @@ module Diaspora
             raise Diaspora::Federation::InvalidAuthor, "#{klass}:#{guid}: #{author.diaspora_handle}"
           end
         end
+      end
+
+      private_class_method def self.send_participation_for(post)
+        return unless post.public?
+        user = user_for_participation
+        participation = Participation.new(target: post, author: user.person)
+        Diaspora::Federation::Dispatcher.build(user, participation, subscribers: [post.author]).dispatch
+      rescue => e # rubocop:disable Lint/RescueWithoutErrorClass
+        logger.warn "failed to send participation for post #{post.guid}: #{e.class}: #{e.message}"
+      end
+
+      # Use configured admin account if available,
+      # or use first user with admin role if available,
+      # or use first user who isn't closed
+      private_class_method def self.user_for_participation
+        User.find_by(username: AppConfig.admins.account.to_s) ||
+          Role.admins.first&.person&.owner ||
+          User.where(locked_at: nil).first
       end
     end
   end

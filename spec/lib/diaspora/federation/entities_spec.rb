@@ -29,6 +29,7 @@ describe Diaspora::Federation::Entities do
       expect(federation_entity.guid).to eq(diaspora_entity.guid)
       expect(federation_entity.parent_guid).to eq(diaspora_entity.post.guid)
       expect(federation_entity.text).to eq(diaspora_entity.text)
+      expect(federation_entity.created_at).to eq(diaspora_entity.created_at)
       expect(federation_entity.author_signature).to be_nil
       expect(federation_entity.additional_data).to be_empty
     end
@@ -42,6 +43,27 @@ describe Diaspora::Federation::Entities do
       expect(federation_entity.guid).to eq(diaspora_entity.guid)
       expect(federation_entity.parent_guid).to eq(diaspora_entity.post.guid)
       expect(federation_entity.text).to eq(diaspora_entity.text)
+      expect(federation_entity.created_at).to eq(diaspora_entity.created_at)
+      expect(federation_entity.author_signature).to eq(diaspora_entity.signature.author_signature)
+      expect(federation_entity.signature_order.map(&:to_s)).to eq(diaspora_entity.signature.signature_order.order.split)
+      expect(federation_entity.additional_data).to eq(diaspora_entity.signature.additional_data)
+    end
+
+    it "builds a comment with edited_at" do
+      edited_at = Time.now.utc + 3600
+      diaspora_entity = FactoryGirl.build(
+        :comment,
+        signature: FactoryGirl.build(:comment_signature, additional_data: {"edited_at" => edited_at})
+      )
+      federation_entity = described_class.build(diaspora_entity)
+
+      expect(federation_entity).to be_instance_of(DiasporaFederation::Entities::Comment)
+      expect(federation_entity.author).to eq(diaspora_entity.author.diaspora_handle)
+      expect(federation_entity.guid).to eq(diaspora_entity.guid)
+      expect(federation_entity.parent_guid).to eq(diaspora_entity.post.guid)
+      expect(federation_entity.text).to eq(diaspora_entity.text)
+      expect(federation_entity.created_at).to eq(diaspora_entity.created_at)
+      expect(federation_entity.edited_at).to eq(edited_at)
       expect(federation_entity.author_signature).to eq(diaspora_entity.signature.author_signature)
       expect(federation_entity.signature_order.map(&:to_s)).to eq(diaspora_entity.signature.signature_order.order.split)
       expect(federation_entity.additional_data).to eq(diaspora_entity.signature.additional_data)
@@ -56,6 +78,19 @@ describe Diaspora::Federation::Entities do
       expect(federation_entity.recipient).to eq(diaspora_entity.person.diaspora_handle)
       expect(federation_entity.sharing).to be_truthy
       expect(federation_entity.following).to be_truthy
+      expect(federation_entity.blocking).to be_falsey
+    end
+
+    it "builds a contact for a block" do
+      diaspora_entity = FactoryGirl.create(:block)
+      federation_entity = described_class.build(diaspora_entity)
+
+      expect(federation_entity).to be_instance_of(DiasporaFederation::Entities::Contact)
+      expect(federation_entity.author).to eq(diaspora_entity.user.diaspora_handle)
+      expect(federation_entity.recipient).to eq(diaspora_entity.person.diaspora_handle)
+      expect(federation_entity.sharing).to be_falsey
+      expect(federation_entity.following).to be_falsey
+      expect(federation_entity.blocking).to be_truthy
     end
 
     context "Conversation" do
@@ -188,6 +223,7 @@ describe Diaspora::Federation::Entities do
 
       expect(federation_entity).to be_instance_of(DiasporaFederation::Entities::Profile)
       expect(federation_entity.author).to eq(diaspora_entity.diaspora_handle)
+      expect(federation_entity.edited_at).to eq(diaspora_entity.updated_at)
       expect(federation_entity.first_name).to eq(diaspora_entity.first_name)
       expect(federation_entity.last_name).to eq(diaspora_entity.last_name)
       expect(federation_entity.image_url).to eq(diaspora_entity.image_url)
@@ -237,6 +273,35 @@ describe Diaspora::Federation::Entities do
         expect(federation_entity.recipient).to eq(target.person.diaspora_handle)
         expect(federation_entity.sharing).to be_falsey
         expect(federation_entity.following).to be_falsey
+        expect(federation_entity.blocking).to be_falsey
+      end
+
+      it "builds a Contact for a Contact retraction with block" do
+        target = FactoryGirl.create(:contact, receiving: false)
+        FactoryGirl.create(:block, user: target.user, person: target.person)
+        retraction = ContactRetraction.for(target)
+        federation_entity = described_class.build(retraction)
+
+        expect(federation_entity).to be_instance_of(DiasporaFederation::Entities::Contact)
+        expect(federation_entity.author).to eq(target.user.diaspora_handle)
+        expect(federation_entity.recipient).to eq(target.person.diaspora_handle)
+        expect(federation_entity.sharing).to be_falsey
+        expect(federation_entity.following).to be_falsey
+        expect(federation_entity.blocking).to be_truthy
+      end
+
+      it "builds a Contact for a Block retraction" do
+        target = FactoryGirl.create(:block)
+        target.delete
+        retraction = ContactRetraction.for(target)
+        federation_entity = described_class.build(retraction)
+
+        expect(federation_entity).to be_instance_of(DiasporaFederation::Entities::Contact)
+        expect(federation_entity.author).to eq(target.user.diaspora_handle)
+        expect(federation_entity.recipient).to eq(target.person.diaspora_handle)
+        expect(federation_entity.sharing).to be_falsey
+        expect(federation_entity.following).to be_falsey
+        expect(federation_entity.blocking).to be_falsey
       end
     end
 
