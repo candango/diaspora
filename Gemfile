@@ -66,7 +66,7 @@ gem "sprockets-rails",        "3.2.1"
 # Database
 
 group :mysql, optional: true do
-  gem "mysql2", "0.4.9"
+  gem "mysql2", "0.4.10"
 end
 group :postgresql, optional: true do
   gem "pg",     "0.21.0"
@@ -135,7 +135,7 @@ gem "markdown-it-html5-embed", "1.0.0"
 
 gem "http_accept_language", "2.1.1"
 gem "i18n-inflector-rails", "1.0.7"
-gem "rails-i18n",           "5.0.4"
+gem "rails-i18n",           "5.1.1"
 
 # Mail
 

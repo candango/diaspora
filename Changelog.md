@@ -8,6 +8,17 @@
 ## Features
 * Add client-side cropping of profile image uploads [#7581](https://github.com/diaspora/diaspora/pull/7581)
 
+# 0.7.5.0
+
+## Refactor
+
+## Bug fixes
+* Prefill conversation form on contacts page only with mutual contacts [#7744](https://github.com/diaspora/diaspora/pull/7744)
+* Fix profiles sometimes not loading properly in background tabs [#7740](https://github.com/diaspora/diaspora/pull/7740)
+* Show error message when creating posts with invalid aspects [#7742](https://github.com/diaspora/diaspora/pull/7742)
+
+## Features
+
 # 0.7.4.0
 
 ## Refactor
@@ -20,9 +31,11 @@
 * Fixed a compatiblitiy issue with non-diaspora\* webfingers [#7718](https://github.com/diaspora/diaspora/pull/7718)
 * Don't retry federation for accounts without a valid public key [#7717](https://github.com/diaspora/diaspora/pull/7717)
 * Fix stream generation for tagged posts with many followed tags [#7715](https://github.com/diaspora/diaspora/pull/7715)
+* Fix incomplete Occitan date localizations [#7731](https://github.com/diaspora/diaspora/pull/7731)
 
 ## Features
 * Add basic html5 audio/video embedding support [#6418](https://github.com/diaspora/diaspora/pull/6418)
+* Add the back-to-top button to all pages [#7729](https://github.com/diaspora/diaspora/pull/7729)
 
 # 0.7.3.1
 
