@@ -1,19 +1,62 @@
 # 0.8.0.0
 
 ## Refactor
+* Add bootstrapping for using ECMAScript 6 with automatic transpiling for compatiblilty [#7581](https://github.com/diaspora/diaspora/pull/7581)
 
 ## Bug fixes
 
 ## Features
+* Add client-side cropping of profile image uploads [#7581](https://github.com/diaspora/diaspora/pull/7581)
+
+# 0.7.5.0
+
+## Refactor
+
+## Bug fixes
+* Prefill conversation form on contacts page only with mutual contacts [#7744](https://github.com/diaspora/diaspora/pull/7744)
+* Fix profiles sometimes not loading properly in background tabs [#7740](https://github.com/diaspora/diaspora/pull/7740)
+* Show error message when creating posts with invalid aspects [#7742](https://github.com/diaspora/diaspora/pull/7742)
+
+## Features
+
+# 0.7.4.0
+
+## Refactor
+* Don't print a warning when starting the server outside a Git repo [#7712](https://github.com/diaspora/diaspora/pull/7712)
+* Make script/server work on readonly filesystems [#7719](https://github.com/diaspora/diaspora/pull/7719)
+* Add camo paths to the robots.txt [#7726](https://github.com/diaspora/diaspora/pull/7726)
+
+## Bug fixes
+* Prevent duplicate mention notifications when the post is received twice [#7721](https://github.com/diaspora/diaspora/pull/7721)
+* Fixed a compatiblitiy issue with non-diaspora\* webfingers [#7718](https://github.com/diaspora/diaspora/pull/7718)
+* Don't retry federation for accounts without a valid public key [#7717](https://github.com/diaspora/diaspora/pull/7717)
+* Fix stream generation for tagged posts with many followed tags [#7715](https://github.com/diaspora/diaspora/pull/7715)
+* Fix incomplete Occitan date localizations [#7731](https://github.com/diaspora/diaspora/pull/7731)
+
+## Features
+* Add basic html5 audio/video embedding support [#6418](https://github.com/diaspora/diaspora/pull/6418)
+* Add the back-to-top button to all pages [#7729](https://github.com/diaspora/diaspora/pull/7729)
+
+# 0.7.3.1
+
+Re-updating the German translations to fix some UX issues that were introduced by recent translation efforts.
 
 # 0.7.3.0
 
 ## Refactor
 * Work on the data downloads: Fixed general layout of buttons, added a timestamp and implemented auto-deletion of old exports [#7684](https://github.com/diaspora/diaspora/pull/7684)
 * Increase Twitter character limit to 280 [#7694](https://github.com/diaspora/diaspora/pull/7694)
+* Improve password autocomplete with password managers [#7642](https://github.com/diaspora/diaspora/pull/7642)
+* Remove the limit of participants in private conversations [#7705](https://github.com/diaspora/diaspora/pull/7705)
+* Send blocks to the blocked persons pod for better UX [#7705](https://github.com/diaspora/diaspora/pull/7705)
+* Send a dummy participation on all incoming public posts to increase interaction consistency [#7708](https://github.com/diaspora/diaspora/pull/7708)
 
 ## Bug fixes
-* Fix invite link on the contacts page when the user has now contacts [#7690](https://github.com/diaspora/diaspora/pull/7690)
+* Fix invite link on the contacts page when the user has no contacts [#7690](https://github.com/diaspora/diaspora/pull/7690)
+* Fix the mobile bookmarklet when called without parameters [#7698](https://github.com/diaspora/diaspora/pull/7698)
+* Properly build the #newhere message for people who got invited [#7702](https://github.com/diaspora/diaspora/pull/7702)
+* Fix the admin report view for posts without text [#7706](https://github.com/diaspora/diaspora/pull/7706)
+* Upgrade Nokogiri to fix [a disclosed vulnerability in libxml2](https://github.com/sparklemotion/nokogiri/issues/1714)
 
 ## Features
 * Check if redis is running in script/server [#7685](https://github.com/diaspora/diaspora/pull/7685)
